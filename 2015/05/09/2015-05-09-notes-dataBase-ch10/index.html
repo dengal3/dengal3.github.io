@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>ailin</title>
+  <title>数据库笔记---ch10 树结构索引 | ailin</title>
   <meta name="author" content="ailin">
   
   <meta name="description" content="All for Recording">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="数据库笔记---ch10 树结构索引"/>
   <meta property="og:site_name" content="ailin"/>
 
   
@@ -44,52 +44,7 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-05-08T16:00:00.000Z"><a href="/2015/05/09/2015-05-09-notes-dataBase-ch13/">2015-05-09</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/05/09/2015-05-09-notes-dataBase-ch13/">数据库笔记--ch13 外排序</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>为什么需要排序？  数据库中很多操作都需要排序，比如用户需要按一定的次序返回查询结果等等<br>为什么要外排序？  因为数据庞大，当需要排序的数据大到主存无法容纳的时候，就需要采用外排序算法，减少磁盘访问的开销。</p>
-<h2 id="简单的两路归并排序算法">简单的两路归并排序算法</h2><p>段：有序的子文件（段的概念感觉比页要大）<br>当主存不能容纳整个文件是，可以把文件划分为规模较小的子文件，首先对每个子文件进行排序，然后将排序后的子文件合并。假设输入文件的数据页数为2^k，那么第0遍处理生成2^k个长位1个数据页的有序段；第1遍处理生成2^k-1个长位2个数据页的有序段…</p>
-<p>每遍的处理是读入一个数据页，处理，然后写回磁盘。因此对每个数据页需要读写磁盘两次。</p>
-<h2 id="外归并排序">外归并排序</h2><p>对两路归并排序算法有两个重要改进：</p>
-<ol>
-<li>第0遍的处理，每次读入B个数据页，在主存内排序胡生成[N/B]个长为B个数据页的段（两路归并排序中是对每个数据页里面的数进行排序，没有合并的操作,所以出来的段数还是N）</li>
-</ol>
-<p>2 .采取（B-1）路归并，总的遍数位[logB-1 N]+1,两路算法的就是[log2 N]+1，而且B通常较大。<br>（疑问：为什么第0遍的时候就可以用B页，之后的都是B-1页，然后有一页用来做输出，难道一开始的时候不需要有页作为输出吗？是和归并算法有关吗？输出的那页到底是怎样的角色？）</p>
-<p>替换排序算法：一个输入缓冲区，一个输出缓冲区，其余都是当前集，要求只要当前集中有K值比输出缓冲区的最大的那个K值大，就得继续从当前集读到输出缓冲区中，造成的空白位由输入缓冲区的一组填上。</p>
-<h3 id="改进外排序算法：">改进外排序算法：</h3><h4 id="块I/O：">块I/O：</h4><p>  读写的单位变为了缓冲区块，就是说每次读写的数据页的数目变多的话，我们就可以尽量减少对数据处理的遍数，因为算法每遍处理都要读写每个数据页。但是这里有个问题就是，我们选择打的缓冲区块的划，每次归并的<br>（疑问：缓冲区和页的大小有关吗？每次的读写的怎样的？按页读写？那当段大于一页的时候是怎样操作的？）</p>
-<h4 id="双缓冲：">双缓冲：</h4><p>因为当缓冲区块的元组用完时，就要去读入当前序段的下一个缓冲区块，这时候的CPU就空闲状态。<br>解决方法：为每个输入缓冲区分配额外的缓冲区页，当一个区块被读完时CPU的就去读另一个区块的，同时发送I/O请求，读取下一个缓冲区块。</p>
-<h2 id="用B+树来排序">用B+树来排序</h2><p>聚簇索引—-推荐用B+树排序<br>非聚簇索引—-不建议，还不如用外排序算法做</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
   <div class="post-content">
     <header>
@@ -99,7 +54,7 @@
       
       
   
-    <h1 class="title"><a href="/2015/05/09/2015-05-09-notes-dataBase-ch10/">数据库笔记---ch10 树结构索引</a></h1>
+    <h1 class="title">数据库笔记---ch10 树结构索引</h1>
   
 
     </header>
@@ -144,7 +99,35 @@
     <footer>
       
         
+  
+  <div class="categories">
+    <a href="/categories/笔记/">笔记</a>, <a href="/categories/笔记/数据库/">数据库</a>
+  </div>
+
         
+  
+  <div class="tags">
+    <a href="/tags/数据库/">数据库</a>, <a href="/tags/树结构索引/">树结构索引</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
       
       <div class="clearfix"></div>
     </footer>
@@ -152,82 +135,27 @@
 </article>
 
 
+<section id="comment">
+  <h1 class="title">留言</h1>
 
-
-  <article class="post">
   
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-05-08T16:00:00.000Z"><a href="/2015/05/09/2015-05-09-about-hexo/">2015-05-09</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/05/09/2015-05-09-about-hexo/">hexo在github搭建博客</a></h1>
-  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
 
-    </header>
-    <div class="entry">
-      
-        <p> 因为之前的jekyll的主题被人吐槽了，所以做烦了数据库之后，决定去给博客换个主题。然后顺便看了一下hexo，发现hexo比jekyll还要简单很多，而且主题页面页很简洁，感觉很不错，就用hexo重新做了。</p>
-<p> 给个链接：<a href="http://blog.fens.me/hexo-blog-github/" target="_blank" rel="external">如何搭建一个独立博客——简明Github Pages与Hexo教程</a><br> 顺便一提，这几天用简书觉得很好用呀，但是因为我主要都是在上面用md写笔记还有作业什么的，它那里好像又没有tag分类，管理起来不太方便，所以还是用自己的博客好:)</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-05-06T16:00:00.000Z"><a href="/2015/05/07/2015-05-07-about-jeklly/">2015-05-07</a></time>
-      
+<div class="fb-comments" data-href="http://dengal3.github.com/2015/05/09/2015-05-09-notes-dataBase-ch10/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
-    <h1 class="title"><a href="/2015/05/07/2015-05-07-about-jeklly/">jekyll以及主题</a></h1>
-  
+</section>
 
-    </header>
-    <div class="entry">
-      
-        <p>jekyll整体的框架比较简单明了，官网说得也比较清楚。链接： <a href="http://jekyllrb.com/" target="_blank" rel="external">官网</a>，还有一个是<a href="http://jekyllcn.com/" target="_blank" rel="external">中文的网站</a></p>
-<p>jekyll的主题也有很多，链接:<a href="http://jekyllcn.com/docs/sites/" target="_blank" rel="external">友情链接</a></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
-<nav id="pagination">
-  
-  
-  <div class="clearfix"></div>
-</nav></div></div>
+</div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
