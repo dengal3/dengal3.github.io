@@ -51,6 +51,57 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2015-05-22T16:00:00.000Z"><a href="/2015/05/23/2015-05-23-thinking-code-organization/">2015-05-23</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/05/23/2015-05-23-thinking-code-organization/">jekyll以及主题</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>前两天重构了一下ehelp的地图页面的代码，用对象来封装了一下方法。<br><a href="https://github.com/dengal3/ehelp/blob/gh-pages/amap-api-first-try.js" target="_blank" rel="external">代码链接</a><br>但是我今天发现这个代码其实还是比较糟糕的，滥用了闭包，而且在每次添加新的方法的时候都要考虑this，<br>这就说明代码有比较大的问题，仍然需要重构。<br>在想新的重构过程中也搜索了一下，下面也有一些有关模块化思想：</p>
+<ul>
+<li><a href="http://www.ruanyifeng.com/blog/2012/10/javascript_module.html" target="_blank" rel="external">Javascript模块化编程（一）：模块的写法</a></li>
+<li><a href="http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html" target="_blank" rel="external">JavaScript-Module-Pattern-In-Depth</a></li>
+<li><a href="http://learn.jquery.com/code-organization/concepts/" target="_blank" rel="external">Code Organization Concepts</a></li>
+</ul>
+<p>对ehelp的地图页面代码的第一次重构：</p>
+<ul>
+<li>提高部分： <ul>
+<li>对js的闭包认识深刻了很多</li>
+<li>第一次尝试模块化的编程</li>
+</ul>
+</li>
+<li>不足：<ul>
+<li>感觉代码的构架还是不够好（我发现EricWang说的TOP思想真的很难QAQ）</li>
+</ul>
+</li>
+</ul>
+<p>（ps:我感觉我这个代码要重构好多次QAQ 什么时候才可以开始下一个页面呢）</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2015-05-08T16:00:00.000Z"><a href="/2015/05/09/2015-05-09-notes-dataBase-ch13/">2015-05-09</a></time>
       
       
@@ -245,6 +296,8 @@
   
     <li><a href="/categories/笔记/数据库/">数据库</a><small>2</small></li>
   
+    <li><a href="/categories/日记/">日记</a><small>1</small></li>
+  
     <li><a href="/categories/博客搭建/日记/">日记</a><small>1</small></li>
   
     <li><a href="/categories/笔记/">笔记</a><small>2</small></li>
@@ -260,7 +313,11 @@
   
     <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
   
+    <li><a href="/tags/javascript/">javascript</a><small>1</small></li>
+  
     <li><a href="/tags/jekyll/">jekyll</a><small>1</small></li>
+  
+    <li><a href="/tags/thinking/">thinking</a><small>1</small></li>
   
     <li><a href="/tags/外排序/">外排序</a><small>1</small></li>
   
