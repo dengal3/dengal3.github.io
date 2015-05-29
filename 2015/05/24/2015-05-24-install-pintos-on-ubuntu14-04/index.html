@@ -251,7 +251,12 @@
 <li>在终端下进入bochs-2.6.7文件夹<br> <img src="/images/2015-05-25/pintos0.png" alt="pic0"></li>
 <li>设置bochs属性<br><code>$ ./configure --with-no-gui --enable-gdb-stub</code></li>
 <li>在该目录下<br><code>$ sudo make install</code><br> <img src="/images/2015-05-25/pintos1.png" alt="pic1"></li>
-<li>在当目录<code>$ bochs</code>,测试<br> <img src="/images/2015-05-25/pintos2.png" alt="pic2"></li>
+<li>在当目录<code>$ bochs</code>,测试<br> <img src="/images/2015-05-25/pintos2.png" alt="pic2"><br> 这里出现了问题：大致的意思是指不能模拟出这个cpu</li>
+<li>我们在当前目录下<code>$ bochs -help cpu</code>,然后就会看到有一列该bochs支持的cpu模式</li>
+<li>这个时候我们就要<code>$ gedit .bochsrc</code>,将里面有一段是model：core2_penryn_t9600把后面一个换为刚刚列表显示</li>
+<li>的一个，将刚刚的步骤重新来一遍</li>
+<li>然后在再次<code>$ bochs</code>的时候你就会发现有lower sound support之类的错误出现。这个时候你就在目录下<br><code>$ ./configure --with-nogui --enable-gdb-stub --enable-sb16</code>，再次<code>$ sudo make install</code></li>
+<li>这次就没有问题啦</li>
 </ol>
 <h3 id="bochs安装好了，现在开始pintos安装部分">bochs安装好了，现在开始pintos安装部分</h3><ol>
 <li>进入~路径下<br><code>$ cd ~</code></li>
