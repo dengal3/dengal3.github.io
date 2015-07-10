@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/javascipt/" style="font-size: 10px;">javascipt</a><a href="/tags/javascript/" style="font-size: 10px;">javascript</a><a href="/tags/jekyll/" style="font-size: 10px;">jekyll</a><a href="/tags/object-oriented/" style="font-size: 10px;">object-oriented</a><a href="/tags/os/" style="font-size: 10px;">os</a><a href="/tags/pintos/" style="font-size: 20px;">pintos</a><a href="/tags/thinking/" style="font-size: 20px;">thinking</a><a href="/tags/thread/" style="font-size: 10px;">thread</a><a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a><a href="/tags/假期/" style="font-size: 10px;">假期</a><a href="/tags/外排序/" style="font-size: 10px;">外排序</a><a href="/tags/数据库/" style="font-size: 20px;">数据库</a><a href="/tags/日常/" style="font-size: 10px;">日常</a><a href="/tags/树结构索引/" style="font-size: 10px;">树结构索引</a>
+						<a href="/tags/css/" style="font-size: 20px;">css</a><a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/javascipt/" style="font-size: 10px;">javascipt</a><a href="/tags/javascript/" style="font-size: 10px;">javascript</a><a href="/tags/jekyll/" style="font-size: 10px;">jekyll</a><a href="/tags/object-oriented/" style="font-size: 10px;">object-oriented</a><a href="/tags/os/" style="font-size: 10px;">os</a><a href="/tags/pintos/" style="font-size: 20px;">pintos</a><a href="/tags/thinking/" style="font-size: 20px;">thinking</a><a href="/tags/thread/" style="font-size: 10px;">thread</a><a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a><a href="/tags/假期/" style="font-size: 20px;">假期</a><a href="/tags/外排序/" style="font-size: 10px;">外排序</a><a href="/tags/布局/" style="font-size: 20px;">布局</a><a href="/tags/数据库/" style="font-size: 20px;">数据库</a><a href="/tags/日常/" style="font-size: 10px;">日常</a><a href="/tags/树结构索引/" style="font-size: 10px;">树结构索引</a><a href="/tags/疑问记录/" style="font-size: 10px;">疑问记录</a>
 					</div>
 				</section>
 				
@@ -186,6 +186,209 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-关于css布局的一些疑问记录" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/10/关于css布局的一些疑问记录/" class="article-date">
+  	<time datetime="2015-07-10T08:02:04.000Z" itemprop="datePublished">2015-07-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/10/关于css布局的一些疑问记录/">关于css布局的一些疑问记录</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有关实践的代码放到了codepen上面,<a href="http://codepen.io/d-ailin/pen" target="_blank" rel="external">链接</a></p>
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="WvJojP" data-default-tab="result" data-user="d-ailin" class="codepen">See the Pen <a href="http://codepen.io/d-ailin/pen/WvJojP/" target="_blank" rel="external">basic layout</a> by ailin (<a href="http://codepen.io/d-ailin" target="_blank" rel="external">@d-ailin</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>第一个是用两种方法实现居中效果</p>
+<ol>
+<li>我感觉margin:auto应该是最常用,正规的了</li>
+<li>设置为display:inline-block,外层包一个,设置text-algin:center</li>
+</ol>
+<p>第二个是用了三种方法实现两列布局(左列宽度不变,右列宽度自适应,听说这是叫双翼布局)</p>
+<ol>
+<li>用的经典的float,但是有个注意的点就是一开始float以后看上去就ok了,其实蓝色div是有一部分”埋”在了红div的底下的,这个不是正确的布局,这个时候的右列要设一个margin-right</li>
+<li>用了relative-absolute经典定位</li>
+<li>用了flex-box做布局</li>
+</ol>
+<p>第三个是用两种方法实现三列布局(左右列的宽度都不变,中间的宽度自适应,这个叫圣杯布局…)</p>
+<ol>
+<li>浮动布局</li>
+<li>relative-absolute定位布局</li>
+<li><strong>用负的margin实现</strong><br> 个人认识:负margin是个很神奇的东西,它还可以和float还有position一起合作.它可以通过margin设为负,使得下面一行的快元素可以退回到上面一行中,但这又是在文档流中的,所以不会引起像float引起的对外面元素的一些影响.感觉很不错.<br> <a href="http://chen106106.iteye.com/blog/1631865" target="_blank" rel="external">通过圣杯布局认识负margin的作用</a><br> <a href="http://www.tuicool.com/articles/zYz2Iz" target="_blank" rel="external">负margin对布局的作用</a></li>
+</ol>
+<p>第四个是浮动布局</p>
+<ol>
+<li>浮动布局</li>
+<li>display:inline-block</li>
+</ol>
+<hr>
+<p><strong>Q&amp;A</strong></p>
+<ol>
+<li>在三列布局的方法2的实现中,如果div-b和div-c的位置不一样,实现的效果会不一样.其中div-a设置的<code>float:left</code>,div-c设置的<code>float:right</code>,他们的宽度都是设成80px的,所以中间的div-b的设置的<code>margin-left:80px, margin-right: 80px</code>,按理说float流和文本流之间没有冲撞的(文字围绕除外),但是如果将div-c放在div-b的后面的话,div-c就会出现在div-a,div-b的下面一行的右边,是div-b的margin-right影响到了div-c的float了吗?但是为什么div-a就不会受到影响呢?(这个应该是因为div-a先于div-b的,这个经过了实验验证的,当div-a后于div-b布局时,也会出现在下面一行中)?那float其实就是会受到正常文本流的margin影响的咯?(我觉得这个疑问应该要深入了解一下css的规则手册有个float和margin的实现计算,之后再更新)</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/布局/">布局</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/疑问记录/">疑问记录</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-CSS的布局" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/09/CSS的布局/" class="article-date">
+  	<time datetime="2015-07-09T07:50:09.000Z" itemprop="datePublished">2015-07-09</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/09/CSS的布局/">CSS的布局</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="行高">行高</h3><p><a href="http://www.cnblogs.com/fengzheng126/archive/2012/05/18/2507632.html" target="_blank" rel="external">深入了解line-height</a></p>
+<hr>
+<h3 id="盒子模型">盒子模型</h3><p>从内到外是:内容,padding,border和margin<br>注意:width一般都只是指内容的宽度,元素的实际表现出来的宽度大小往往是内容的width+padding+border-width</p>
+<hr>
+<h3 id="基本布局模型:">基本布局模型:</h3><ol>
+<li>流动模型(基本默认)</li>
+<li>浮动模型(float)</li>
+<li>层模型(layout)</li>
+</ol>
+<p><strong>流动模型</strong><br>特征:</p>
+<ol>
+<li>块状元素都会在所处的包含元素自上而下按顺序垂直延伸分布,默认下块状元素的宽度都是100%</li>
+<li>内联元素都是在所处的包含元素内从左到右水平分布显示</li>
+</ol>
+<p><strong>浮动模型</strong><br>本质意图就是要让内容不要独占一行,使内容并排显示</p>
+<p><strong>层模型</strong></p>
+<ol>
+<li>绝对定位(absolute)</li>
+<li>相对定位(relative)</li>
+<li>固定定位(fixed)</li>
+</ol>
+<p><strong>绝对定位</strong><br>这条语句的作用将元素从文档流中拖出来，然后使用left、right、top、bottom属性相对于其最接近的一个具有定位属性的父包含块进行绝对定位。如果不存在这样的包含块，则相对于body元素，即相对于浏览器窗口</p>
+<p><strong>相对定位</strong><br>它通过left、right、top、bottom属性确定元素在正常文档流中的偏移位置。相对定位完成的过程是首先按static(float)方式生成一个元素(并且元素像层一样浮动了起来)，然后相对于以前的位置移动，移动的方向和幅度由left、right、top、bottom属性确定，偏移前的位置保留不动。</p>
+<p><strong>固定定位</strong><br>表示固定定位，与absolute定位类型类似，但它的相对移动的坐标是视图（屏幕内的网页窗口）本身。由于视图本身是固定的，它不会随浏览器窗口的滚动条滚动而变化，除非你在屏幕中移动浏览器窗口的屏幕位置，或改变浏览器窗口的显示大小，因此固定定位的元素会始终位于浏览器窗口内视图的某个位置，不会受文档流动影响</p>
+<p><strong>常用手法:相对定位+绝对定位</strong><br>将包含的外层元素设为<code>position:relative</code>,将定位的元素设为<code>position:absolute; top:xxx...</code>来实现</p>
+<hr>
+<p>属性box-sizing(需要前缀)<br>-webkit-<em><br>-moz-</em></p>
+<hr>
+<p>用inline-block来实现float的效果:但是</p>
+<ol>
+<li>vertical-algin会影响</li>
+<li>每一列的宽度都要设置</li>
+<li>如果文本中有空格的话就会有间隙(inline-block本来就是这样)</li>
+</ol>
+<hr>
+<p>css新属性,帮助文字的多列布局</p>
+<ul>
+<li><p>column</p>
+</li>
+<li><p>flexbox<br>  新的flexbox布局模式被用来重新定义css中的布局方式(但最近改动频繁,浏览器对他的支持不一)<br>  <a href="http://zh.learnlayout.com/flexbox.html" target="_blank" rel="external">flexbox链接</a></p>
+</li>
+</ul>
+<hr>
+<p>双飞翼布局,圣杯介绍(呃,这名字可真是相当的2)<br><a href="http://www.cnblogs.com/2050/archive/2012/08/13/2636467.html" target="_blank" rel="external">强大的负边距</a><br>利用负的margin调整位置(文本流里面的定位计算实质也要通过margin来的)</p>
+<hr>
+<p>float&amp;clear<br>清除浮动一般就两类方法:</p>
+<ol>
+<li>通过在浮动元素的末尾添加一个空元素，设置 clear：both属性，after伪元素其实也是通过 content 在元素的后面生成了内容为一个点的块级元素</li>
+<li>通过设置父元素 overflow 或者display：table 属性来闭合浮动(它这里的原理是涉及到了BFC)</li>
+</ol>
+<p>更多详情相关</p>
+<h2 id="那些年我们一起清除过的浮动"><a href="http://www.iyunlu.com/view/css-xhtml/55.html" target="_blank" rel="external">那些年我们一起清除过的浮动</a></h2><p>BFC<br><a href="http://www.cnblogs.com/pigtail/archive/2013/01/23/2871627.html" target="_blank" rel="external">关于Block Formatting Context</a></p>
+<p>嗯,看了之后我觉得有时候我们可能有必要去看看css规范里面的计算规则.</p>
+<p>简单说一下BFC的特性:</p>
+<ol>
+<li>块级格式化上下文(即BFC)会阻止外边距叠加(一般来说相邻两个元素的margin会相互叠加的,如果是两个元素处于不同的BFC的话BFC就不会有这种情况出现了,但这时候的负的margin会不起作用,因为不同的BFC会创建隐式的外边距来阻止块之间的叠加)</li>
+<li>块级格式化上下文不会重叠浮动元素(原理同上)</li>
+<li>块级格式化上下文通常可以包含浮动</li>
+</ol>
+<p>如何生成一个BFC?</p>
+<ol>
+<li>float除了none以外的值</li>
+<li>overflow除了visible以外的值(hidden,auto,scroll)</li>
+<li>display(table-cell,table-caption,inline-block)</li>
+<li>position(absolute,fixed)</li>
+<li>fieldset元素</li>
+</ol>
+<p>一个有关布局很棒的网站:<br><a href="http://zh.learnlayout.com/" target="_blank" rel="external">学习css布局</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/假期/">假期</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/布局/">布局</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-假期第一天" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -624,6 +827,97 @@
 
 
   
+    <article id="post-2015-05-09-about-hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/09/2015-05-09-about-hexo/" class="article-date">
+  	<time datetime="2015-05-08T16:00:00.000Z" itemprop="datePublished">2015-05-09</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/09/2015-05-09-about-hexo/">hexo在github搭建博客</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 因为之前的jekyll的主题被人吐槽了，所以做烦了数据库之后，决定去给博客换个主题。然后顺便看了一下hexo，发现hexo比jekyll还要简单很多，而且主题页面页很简洁，感觉很不错，就用hexo重新做了。</p>
+<h2 id="关键步骤:">关键步骤:</h2><ol>
+<li><p>通过npm全局安装hexo</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -<span class="keyword">g</span> hexo-<span class="keyword">cli</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果之后想在本地调试的话就要装hexo-server,要部署到git上面的话就要装hexo-deployer,这可能和网上的一些教程不一样，因为那些<br> 教程是hexo2的，hexo3的server命令选项和一些其他的模块是要分开下的</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm <span class="operator"><span class="keyword">install</span> hexo-deployer-git hexo-<span class="keyword">server</span> -save</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>初始化一个hexo项目</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$hexo</span> init</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果你现在迫不及待，如狼似虎地想看看你的博客</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">$hexo</span> <span class="keyword">g</span>             <span class="comment">//hexo generate  生成代码</span></span><br><span class="line">$ hexo s            <span class="comment">//hexo server      部署到localhost:4000</span></span><br><span class="line">                        <span class="comment">// 如果你发现你没有这个命令的话 你很有可能是没有装hexo-server模块</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>你还可以换换主题，hexo有很多很棒的主题的<a href="http://www.zhihu.com/question/24422335" target="_blank" rel="external">戳我，我是任意门</a></p>
+<p> 一般主题的github下的readme都有讲怎么做的，但我再详细讲一下好了<br> 其实当你hexo init的时候，就会发现你的目录下面多了一个’themes’的文件夹，里面有一个’landscape’,这个是<br> hexo的默认主题，如果你现在想换yilia主题的话,你先回到上级目录</p>
+ <figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$cd</span> ..</span><br><span class="line"><span class="variable">$ </span>git clone <span class="symbol">https:</span>/<span class="regexp">/github.com/litten</span><span class="regexp">/hexo-theme-yilia.git themes/yilia</span></span><br></pre></td></tr></table></figure>
+<p> 然后你发现你的themes目录下多了一个yilia，但是现在还不行，你要需要去hexo项目的目录下（记住，这很重要）去修改_’config.yml’中的theme，<br> 把landscape改为yilia</p>
+</li>
+<li><p>然后你可能兴高采烈地去看localhost:4000，但你发现页面没有变，这里有个就是如果你改了’_config.yml’，最好是在下次看页面之前</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean                    <span class="comment">//清除刚刚生成的文件</span></span><br><span class="line">$ hexo <span class="keyword">g</span>                          <span class="comment">//重新生成文件</span></span><br><span class="line">$ hexo s                          <span class="comment">//再次开启localhost:4000端口的大门</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>你很开心地发现页面变了，然后你决定去写一篇意味深长的博文告诉世人你有博客啦，这时候，你就可以</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$hexo</span> new post <span class="string">"i have a dream"</span>           \\其实自己去<span class="built_in">source</span>目录下命名也可以，加上日期的话就可以排序</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后你写好了博客，要推到github上面（记住上面的hexo-deployer-git模块你已经安装好了）,这时你去刚刚改了theme的那个_config.yml的文件下</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">deploy</span>:</span><br><span class="line">  <span class="attribute">type</span>: git</span><br><span class="line">  <span class="attribute">repository</span>: git<span class="variable">@github</span>.<span class="attribute">com</span>:yourgithubname/yourgithubname.github.io.git</span><br><span class="line">  <span class="attribute">branch</span>: master</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>非常好，然后你就</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>hexo deploy</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>然后像git push的时候一样把你的name，password输进去就好了</p>
+<p>终于讲完了（不用谢:)）</p>
+<p> 给个链接：<br> <a href="http://blog.fens.me/hexo-blog-github/" target="_blank" rel="external">如何搭建一个独立博客——简明Github Pages与Hexo教程</a><br> <a href="http://forsweet.github.io/2015/04/20/%E7%94%A8Hexo%E6%90%AD%E5%BB%BAGithub%E5%8D%9A%E5%AE%A2/" target="_blank" rel="external">用Hexo 3 搭建github blog</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/博客搭建/">博客搭建</a><a class="article-category-link" href="/categories/博客搭建/日记/">日记</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-2015-05-09-notes-dataBase-ch13" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -781,155 +1075,10 @@
 
 
   
-    <article id="post-2015-05-09-about-hexo" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2015/05/09/2015-05-09-about-hexo/" class="article-date">
-  	<time datetime="2015-05-08T16:00:00.000Z" itemprop="datePublished">2015-05-09</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/09/2015-05-09-about-hexo/">hexo在github搭建博客</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 因为之前的jekyll的主题被人吐槽了，所以做烦了数据库之后，决定去给博客换个主题。然后顺便看了一下hexo，发现hexo比jekyll还要简单很多，而且主题页面页很简洁，感觉很不错，就用hexo重新做了。</p>
-<h2 id="关键步骤:">关键步骤:</h2><ol>
-<li><p>通过npm全局安装hexo</p>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -<span class="keyword">g</span> hexo-<span class="keyword">cli</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果之后想在本地调试的话就要装hexo-server,要部署到git上面的话就要装hexo-deployer,这可能和网上的一些教程不一样，因为那些<br> 教程是hexo2的，hexo3的server命令选项和一些其他的模块是要分开下的</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm <span class="operator"><span class="keyword">install</span> hexo-deployer-git hexo-<span class="keyword">server</span> -save</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>初始化一个hexo项目</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$hexo</span> init</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果你现在迫不及待，如狼似虎地想看看你的博客</p>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">$hexo</span> <span class="keyword">g</span>             <span class="comment">//hexo generate  生成代码</span></span><br><span class="line">$ hexo s            <span class="comment">//hexo server      部署到localhost:4000</span></span><br><span class="line">                        <span class="comment">// 如果你发现你没有这个命令的话 你很有可能是没有装hexo-server模块</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>你还可以换换主题，hexo有很多很棒的主题的<a href="http://www.zhihu.com/question/24422335" target="_blank" rel="external">戳我，我是任意门</a></p>
-<p> 一般主题的github下的readme都有讲怎么做的，但我再详细讲一下好了<br> 其实当你hexo init的时候，就会发现你的目录下面多了一个’themes’的文件夹，里面有一个’landscape’,这个是<br> hexo的默认主题，如果你现在想换yilia主题的话,你先回到上级目录</p>
- <figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$cd</span> ..</span><br><span class="line"><span class="variable">$ </span>git clone <span class="symbol">https:</span>/<span class="regexp">/github.com/litten</span><span class="regexp">/hexo-theme-yilia.git themes/yilia</span></span><br></pre></td></tr></table></figure>
-<p> 然后你发现你的themes目录下多了一个yilia，但是现在还不行，你要需要去hexo项目的目录下（记住，这很重要）去修改_’config.yml’中的theme，<br> 把landscape改为yilia</p>
-</li>
-<li><p>然后你可能兴高采烈地去看localhost:4000，但你发现页面没有变，这里有个就是如果你改了’_config.yml’，最好是在下次看页面之前</p>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean                    <span class="comment">//清除刚刚生成的文件</span></span><br><span class="line">$ hexo <span class="keyword">g</span>                          <span class="comment">//重新生成文件</span></span><br><span class="line">$ hexo s                          <span class="comment">//再次开启localhost:4000端口的大门</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>你很开心地发现页面变了，然后你决定去写一篇意味深长的博文告诉世人你有博客啦，这时候，你就可以</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$hexo</span> new post <span class="string">"i have a dream"</span>           \\其实自己去<span class="built_in">source</span>目录下命名也可以，加上日期的话就可以排序</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>然后你写好了博客，要推到github上面（记住上面的hexo-deployer-git模块你已经安装好了）,这时你去刚刚改了theme的那个_config.yml的文件下</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">deploy</span>:</span><br><span class="line">  <span class="attribute">type</span>: git</span><br><span class="line">  <span class="attribute">repository</span>: git<span class="variable">@github</span>.<span class="attribute">com</span>:yourgithubname/yourgithubname.github.io.git</span><br><span class="line">  <span class="attribute">branch</span>: master</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>非常好，然后你就</p>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>hexo deploy</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>然后像git push的时候一样把你的name，password输进去就好了</p>
-<p>终于讲完了（不用谢:)）</p>
-<p> 给个链接：<br> <a href="http://blog.fens.me/hexo-blog-github/" target="_blank" rel="external">如何搭建一个独立博客——简明Github Pages与Hexo教程</a><br> <a href="http://forsweet.github.io/2015/04/20/%E7%94%A8Hexo%E6%90%AD%E5%BB%BAGithub%E5%8D%9A%E5%AE%A2/" target="_blank" rel="external">用Hexo 3 搭建github blog</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/博客搭建/">博客搭建</a><a class="article-category-link" href="/categories/博客搭建/日记/">日记</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-2015-05-07-about-jeklly" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/05/07/2015-05-07-about-jeklly/" class="article-date">
-  	<time datetime="2015-05-06T16:00:00.000Z" itemprop="datePublished">2015-05-07</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/07/2015-05-07-about-jeklly/">jekyll以及主题</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>jekyll整体的框架比较简单明了，官网说得也比较清楚。链接： <a href="http://jekyllrb.com/" target="_blank" rel="external">官网</a>，还有一个是<a href="http://jekyllcn.com/" target="_blank" rel="external">中文的网站</a></p>
-<p>jekyll的主题也有很多，链接:<a href="http://jekyllcn.com/docs/sites/" target="_blank" rel="external">友情链接</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jekyll/">jekyll</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/博客搭建/">博客搭建</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">

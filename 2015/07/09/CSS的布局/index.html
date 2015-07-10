@@ -3,26 +3,50 @@
 <head>
   <meta charset="utf-8">
   
-  <title>javascript模块化编程 | ailin</title>
+  <title>CSS的布局 | ailin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前两天重构了一下ehelp的地图页面的代码，用对象来封装了一下方法。代码链接但是我今天发现这个代码其实还是比较糟糕的，滥用了闭包，而且在每次添加新的方法的时候都要考虑this，这就说明代码有比较大的问题，仍然需要重构。在想新的重构过程中也搜索了一下，下面也有一些有关模块化思想：
+  <meta name="description" content="行高深入了解line-height
 
-Javascript模块化编程（一）：模块的写法
-JavaScript-Module-Pattern-In-Depth">
+盒子模型从内到外是:内容,padding,border和margin注意:width一般都只是指内容的宽度,元素的实际表现出来的宽度大小往往是内容的width+padding+border-width
+
+基本布局模型:
+流动模型(基本默认)
+浮动模型(float)
+层模型(layout)
+
+流动模型特征:
+
+块状元素都会在所处的包含元素自上而下按顺序垂直延伸分">
 <meta property="og:type" content="article">
-<meta property="og:title" content="javascript模块化编程">
-<meta property="og:url" content="http://dengal3.github.com/2015/05/23/2015-05-23-thinking-code-organization/index.html">
+<meta property="og:title" content="CSS的布局">
+<meta property="og:url" content="http://dengal3.github.com/2015/07/09/CSS的布局/index.html">
 <meta property="og:site_name" content="ailin">
-<meta property="og:description" content="前两天重构了一下ehelp的地图页面的代码，用对象来封装了一下方法。代码链接但是我今天发现这个代码其实还是比较糟糕的，滥用了闭包，而且在每次添加新的方法的时候都要考虑this，这就说明代码有比较大的问题，仍然需要重构。在想新的重构过程中也搜索了一下，下面也有一些有关模块化思想：
+<meta property="og:description" content="行高深入了解line-height
 
-Javascript模块化编程（一）：模块的写法
-JavaScript-Module-Pattern-In-Depth">
+盒子模型从内到外是:内容,padding,border和margin注意:width一般都只是指内容的宽度,元素的实际表现出来的宽度大小往往是内容的width+padding+border-width
+
+基本布局模型:
+流动模型(基本默认)
+浮动模型(float)
+层模型(layout)
+
+流动模型特征:
+
+块状元素都会在所处的包含元素自上而下按顺序垂直延伸分">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="javascript模块化编程">
-<meta name="twitter:description" content="前两天重构了一下ehelp的地图页面的代码，用对象来封装了一下方法。代码链接但是我今天发现这个代码其实还是比较糟糕的，滥用了闭包，而且在每次添加新的方法的时候都要考虑this，这就说明代码有比较大的问题，仍然需要重构。在想新的重构过程中也搜索了一下，下面也有一些有关模块化思想：
+<meta name="twitter:title" content="CSS的布局">
+<meta name="twitter:description" content="行高深入了解line-height
 
-Javascript模块化编程（一）：模块的写法
-JavaScript-Module-Pattern-In-Depth">
+盒子模型从内到外是:内容,padding,border和margin注意:width一般都只是指内容的宽度,元素的实际表现出来的宽度大小往往是内容的width+padding+border-width
+
+基本布局模型:
+流动模型(基本默认)
+浮动模型(float)
+层模型(layout)
+
+流动模型特征:
+
+块状元素都会在所处的包含元素自上而下按顺序垂直延伸分">
   
     <link rel="alternative" href="/atom.xml" title="ailin" type="application/atom+xml">
   
@@ -194,11 +218,11 @@ JavaScript-Module-Pattern-In-Depth">
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-2015-05-23-thinking-code-organization" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-CSS的布局" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/05/23/2015-05-23-thinking-code-organization/" class="article-date">
-  	<time datetime="2015-05-22T16:00:00.000Z" itemprop="datePublished">2015-05-23</time>
+      <a href="/2015/07/09/CSS的布局/" class="article-date">
+  	<time datetime="2015-07-09T07:50:09.000Z" itemprop="datePublished">2015-07-09</time>
 </a>
     </div>
   
@@ -211,7 +235,7 @@ JavaScript-Module-Pattern-In-Depth">
         
   
     <h1 class="article-title" itemprop="name">
-      javascript模块化编程
+      CSS的布局
     </h1>
   
 
@@ -220,14 +244,10 @@ JavaScript-Module-Pattern-In-Depth">
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/thinking/">thinking</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/假期/">假期</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/布局/">布局</a></li></ul>
 	</div>
 
         
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/tech-diary/">tech-diary</a>
-	</div>
-
 
         <div class="clearfix"></div>
       </div>
@@ -235,25 +255,74 @@ JavaScript-Module-Pattern-In-Depth">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>前两天重构了一下ehelp的地图页面的代码，用对象来封装了一下方法。<br><a href="https://github.com/dengal3/ehelp/blob/gh-pages/amap-api-first-try.js" target="_blank" rel="external">代码链接</a><br>但是我今天发现这个代码其实还是比较糟糕的，滥用了闭包，而且在每次添加新的方法的时候都要考虑this，<br>这就说明代码有比较大的问题，仍然需要重构。<br>在想新的重构过程中也搜索了一下，下面也有一些有关模块化思想：</p>
+        <h3 id="行高">行高</h3><p><a href="http://www.cnblogs.com/fengzheng126/archive/2012/05/18/2507632.html" target="_blank" rel="external">深入了解line-height</a></p>
+<hr>
+<h3 id="盒子模型">盒子模型</h3><p>从内到外是:内容,padding,border和margin<br>注意:width一般都只是指内容的宽度,元素的实际表现出来的宽度大小往往是内容的width+padding+border-width</p>
+<hr>
+<h3 id="基本布局模型:">基本布局模型:</h3><ol>
+<li>流动模型(基本默认)</li>
+<li>浮动模型(float)</li>
+<li>层模型(layout)</li>
+</ol>
+<p><strong>流动模型</strong><br>特征:</p>
+<ol>
+<li>块状元素都会在所处的包含元素自上而下按顺序垂直延伸分布,默认下块状元素的宽度都是100%</li>
+<li>内联元素都是在所处的包含元素内从左到右水平分布显示</li>
+</ol>
+<p><strong>浮动模型</strong><br>本质意图就是要让内容不要独占一行,使内容并排显示</p>
+<p><strong>层模型</strong></p>
+<ol>
+<li>绝对定位(absolute)</li>
+<li>相对定位(relative)</li>
+<li>固定定位(fixed)</li>
+</ol>
+<p><strong>绝对定位</strong><br>这条语句的作用将元素从文档流中拖出来，然后使用left、right、top、bottom属性相对于其最接近的一个具有定位属性的父包含块进行绝对定位。如果不存在这样的包含块，则相对于body元素，即相对于浏览器窗口</p>
+<p><strong>相对定位</strong><br>它通过left、right、top、bottom属性确定元素在正常文档流中的偏移位置。相对定位完成的过程是首先按static(float)方式生成一个元素(并且元素像层一样浮动了起来)，然后相对于以前的位置移动，移动的方向和幅度由left、right、top、bottom属性确定，偏移前的位置保留不动。</p>
+<p><strong>固定定位</strong><br>表示固定定位，与absolute定位类型类似，但它的相对移动的坐标是视图（屏幕内的网页窗口）本身。由于视图本身是固定的，它不会随浏览器窗口的滚动条滚动而变化，除非你在屏幕中移动浏览器窗口的屏幕位置，或改变浏览器窗口的显示大小，因此固定定位的元素会始终位于浏览器窗口内视图的某个位置，不会受文档流动影响</p>
+<p><strong>常用手法:相对定位+绝对定位</strong><br>将包含的外层元素设为<code>position:relative</code>,将定位的元素设为<code>position:absolute; top:xxx...</code>来实现</p>
+<hr>
+<p>属性box-sizing(需要前缀)<br>-webkit-<em><br>-moz-</em></p>
+<hr>
+<p>用inline-block来实现float的效果:但是</p>
+<ol>
+<li>vertical-algin会影响</li>
+<li>每一列的宽度都要设置</li>
+<li>如果文本中有空格的话就会有间隙(inline-block本来就是这样)</li>
+</ol>
+<hr>
+<p>css新属性,帮助文字的多列布局</p>
 <ul>
-<li><a href="http://www.ruanyifeng.com/blog/2012/10/javascript_module.html" target="_blank" rel="external">Javascript模块化编程（一）：模块的写法</a></li>
-<li><a href="http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html" target="_blank" rel="external">JavaScript-Module-Pattern-In-Depth</a></li>
-<li><a href="http://learn.jquery.com/code-organization/concepts/" target="_blank" rel="external">Code Organization Concepts</a></li>
-</ul>
-<p>对ehelp的地图页面代码的第一次重构：</p>
-<ul>
-<li>提高部分： <ul>
-<li>对js的闭包认识深刻了很多</li>
-<li>第一次尝试模块化的编程</li>
-</ul>
+<li><p>column</p>
 </li>
-<li>不足：<ul>
-<li>感觉代码的构架还是不够好（我发现EricWang说的TOP思想真的很难QAQ）</li>
-</ul>
+<li><p>flexbox<br>  新的flexbox布局模式被用来重新定义css中的布局方式(但最近改动频繁,浏览器对他的支持不一)<br>  <a href="http://zh.learnlayout.com/flexbox.html" target="_blank" rel="external">flexbox链接</a></p>
 </li>
 </ul>
-<p>（ps:我感觉我这个代码要重构好多次QAQ 什么时候才可以开始下一个页面呢）</p>
+<hr>
+<p>双飞翼布局,圣杯介绍(呃,这名字可真是相当的2)<br><a href="http://www.cnblogs.com/2050/archive/2012/08/13/2636467.html" target="_blank" rel="external">强大的负边距</a><br>利用负的margin调整位置(文本流里面的定位计算实质也要通过margin来的)</p>
+<hr>
+<p>float&amp;clear<br>清除浮动一般就两类方法:</p>
+<ol>
+<li>通过在浮动元素的末尾添加一个空元素，设置 clear：both属性，after伪元素其实也是通过 content 在元素的后面生成了内容为一个点的块级元素</li>
+<li>通过设置父元素 overflow 或者display：table 属性来闭合浮动(它这里的原理是涉及到了BFC)</li>
+</ol>
+<p>更多详情相关</p>
+<h2 id="那些年我们一起清除过的浮动"><a href="http://www.iyunlu.com/view/css-xhtml/55.html" target="_blank" rel="external">那些年我们一起清除过的浮动</a></h2><p>BFC<br><a href="http://www.cnblogs.com/pigtail/archive/2013/01/23/2871627.html" target="_blank" rel="external">关于Block Formatting Context</a></p>
+<p>嗯,看了之后我觉得有时候我们可能有必要去看看css规范里面的计算规则.</p>
+<p>简单说一下BFC的特性:</p>
+<ol>
+<li>块级格式化上下文(即BFC)会阻止外边距叠加(一般来说相邻两个元素的margin会相互叠加的,如果是两个元素处于不同的BFC的话BFC就不会有这种情况出现了,但这时候的负的margin会不起作用,因为不同的BFC会创建隐式的外边距来阻止块之间的叠加)</li>
+<li>块级格式化上下文不会重叠浮动元素(原理同上)</li>
+<li>块级格式化上下文通常可以包含浮动</li>
+</ol>
+<p>如何生成一个BFC?</p>
+<ol>
+<li>float除了none以外的值</li>
+<li>overflow除了visible以外的值(hidden,auto,scroll)</li>
+<li>display(table-cell,table-caption,inline-block)</li>
+<li>position(absolute,fixed)</li>
+<li>fieldset元素</li>
+</ol>
+<p>一个有关布局很棒的网站:<br><a href="http://zh.learnlayout.com/" target="_blank" rel="external">学习css布局</a></p>
 
       
     </div>
@@ -263,18 +332,18 @@ JavaScript-Module-Pattern-In-Depth">
     
 <nav id="article-nav">
   
-    <a href="/2015/05/24/2015-05-24-install-pintos-on-ubuntu14-04/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/07/10/关于css布局的一些疑问记录/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          install-pintos-on-ubuntu14.04
+          关于css布局的一些疑问记录
         
       </div>
     </a>
   
   
-    <a href="/2015/05/09/2015-05-09-about-hexo/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">hexo在github搭建博客</div>
+    <a href="/2015/07/08/假期第一天/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">假期第一天</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -303,7 +372,7 @@ JavaScript-Module-Pattern-In-Depth">
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="2015-05-23-thinking-code-organization" data-title="javascript模块化编程" data-url="http://dengal3.github.com/2015/05/23/2015-05-23-thinking-code-organization/"></div>
+	<div class="ds-thread" data-thread-key="CSS的布局" data-title="CSS的布局" data-url="http://dengal3.github.com/2015/07/09/CSS的布局/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
