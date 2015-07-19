@@ -266,7 +266,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/10/关于css布局的一些疑问记录/">关于css布局的一些疑问记录</a>
+      <a class="article-title" href="/2015/07/10/关于css布局的一些疑问记录/">关于css的一些疑问记录</a>
     </h1>
   
 
@@ -324,6 +324,11 @@
 <li>line-height == height</li>
 </ol>
 <p>有时不知为何会出现空隙..此时要float一下空隙就没了</p>
+<p>设置height:100% 时会失效<br>解决方法:</p>
+<ol>
+<li>100%这个百分比是要相对于父元素来讲的,父元素没有设置height的话,有可能就会失效</li>
+<li>html和body也要设置好百分比100%</li>
+</ol>
 
       
     </div>

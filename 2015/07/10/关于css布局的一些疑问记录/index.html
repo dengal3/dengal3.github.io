@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>关于css布局的一些疑问记录 | ailin</title>
+  <title>关于css的一些疑问记录 | ailin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="有关实践的代码放到了codepen上面,链接
 See the Pen basic layout by ailin (@d-ailin) on CodePen.
@@ -16,7 +16,7 @@ See the Pen basic layout by ailin (@d-ailin) on CodePen.
 
 第二个是用了三种方法实现两列布局(左列宽度不变,">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于css布局的一些疑问记录">
+<meta property="og:title" content="关于css的一些疑问记录">
 <meta property="og:url" content="http://dengal3.github.com/2015/07/10/关于css布局的一些疑问记录/index.html">
 <meta property="og:site_name" content="ailin">
 <meta property="og:description" content="有关实践的代码放到了codepen上面,链接
@@ -30,7 +30,7 @@ See the Pen basic layout by ailin (@d-ailin) on CodePen.
 
 第二个是用了三种方法实现两列布局(左列宽度不变,">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于css布局的一些疑问记录">
+<meta name="twitter:title" content="关于css的一些疑问记录">
 <meta name="twitter:description" content="有关实践的代码放到了codepen上面,链接
 See the Pen basic layout by ailin (@d-ailin) on CodePen.
 
@@ -229,7 +229,7 @@ See the Pen basic layout by ailin (@d-ailin) on CodePen.
         
   
     <h1 class="article-title" itemprop="name">
-      关于css布局的一些疑问记录
+      关于css的一些疑问记录
     </h1>
   
 
@@ -298,6 +298,11 @@ See the Pen basic layout by ailin (@d-ailin) on CodePen.
 <li>line-height == height</li>
 </ol>
 <p>有时不知为何会出现空隙..此时要float一下空隙就没了</p>
+<p>设置height:100% 时会失效<br>解决方法:</p>
+<ol>
+<li>100%这个百分比是要相对于父元素来讲的,父元素没有设置height的话,有可能就会失效</li>
+<li>html和body也要设置好百分比100%</li>
+</ol>
 
       
     </div>
@@ -347,7 +352,7 @@ See the Pen basic layout by ailin (@d-ailin) on CodePen.
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="关于css布局的一些疑问记录" data-title="关于css布局的一些疑问记录" data-url="http://dengal3.github.com/2015/07/10/关于css布局的一些疑问记录/"></div>
+	<div class="ds-thread" data-thread-key="关于css布局的一些疑问记录" data-title="关于css的一些疑问记录" data-url="http://dengal3.github.com/2015/07/10/关于css布局的一些疑问记录/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
