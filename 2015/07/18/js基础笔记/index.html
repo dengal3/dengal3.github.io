@@ -244,6 +244,44 @@
 </ol>
 </li>
 </ol>
+<hr>
+<h3 id="js的数据类型">js的数据类型</h3><p>原始值和对象</p>
+<h4 id="原始值:">原始值:</h4><ul>
+<li>boolean</li>
+<li>null</li>
+<li>undefined—&gt;一个没有被赋值的变量会有个默认值undefined</li>
+<li>number(Infinity,MAX_VALUE,MIN_VALUE)</li>
+<li>string(substr, concat)</li>
+<li>symbol(new in ES6)</li>
+</ul>
+<p>原始值:除 Object 以外的所有类型都是不可变的（值本身无法被改变）。例如，与 C 语言不同，<strong>JavaScript 中字符串是不可变的</strong>（译注：如，JavaScript 中对字符串的操作一定返回了一个新字符串，原始字符串并没有被改变）。我们称这些类型的值为“原始值”。</p>
+<h4 id="对象:">对象:</h4><p>A javascript object is a mapping between keys and values.Keys are string adn values can be anything.<br>Functions are regular objects with the additional capability of being callable</p>
+<p>数组:数组是以数字为下标并且拥有length属性的对象。此外，数组继承了 Array.prototype 的方法，比如indexOf（搜索某个值），push(往数组里追加值)。这种特性使得数组成为列表或者集合的最佳的存储结构（数据结构）。</p>
+<p>日期:内建的Date对象</p>
+<hr>
+<h3 id="js之typeof,constructor,instanceof">js之typeof,constructor,instanceof</h3><h4 id="typeof">typeof</h4><p>使用typeof运算符获取一个值的类型，可能的结果有5种：</p>
+<ol>
+<li>undefined</li>
+<li>boolean</li>
+<li>number</li>
+<li>string</li>
+<li>object<br>无论引用的是什么类型的对象,都返回”object”(除了function,但是array返回的是”object”)</li>
+</ol>
+<h4 id="instanceof">instanceof</h4><p>在引用类型值判断类型的时候，typeof运算符会出现一个问题，无论引用的是什么类型的对象，它都返回”object”。</p>
+<p>ECMAScript引入了另一个Java运算符instanceof来解决这个问题。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span><span class="params">()</span></span>&#123;&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">User</span><span class="params">()</span></span>&#123;&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> u=<span class="keyword">new</span> User;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log( u <span class="keyword">instanceof</span> Person ); <span class="comment">//false</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log( u <span class="keyword">instanceof</span> User ); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<h4 id="Object-constructor属性">Object.constructor属性</h4><p>javascript中的所有对象都继承自Object。</p>
+<p>constructor是Object的一个属性，他指向：创建对象的函数的引用（指针）。（可以理解为constructor指向对象的构造函数）<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> functionUser()&#123;&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> u=<span class="keyword">new</span> User;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(u.constructor===User );<span class="comment">//得到true，也就是说对象的constructor属性指向他的构造函数。</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(u.constructor.name );<span class="comment">//得到User，也就是构造函数的名称</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="小结:">小结:</h4><p>typeof，是一个运算符，运算中需要一个操作数，运算的结果就是这个操作数的类型，运算的结果是一个字符串。他有一定的局限性，对于对象类型的值，只能得到一个”object”结果，却不能精确得到此值的精确类型。</p>
+<h2 id="示例：typeof_‘hello’_//得到”string”">示例：typeof ‘hello’ //得到”string”</h2><p>instanceof，也是一个运算符，运算中需要两个操作数，运算的结果是true或false，表示此值是不是某一个类的示例，能得到一个值的具体类型。</p>
+<h2 id="示例：function_User(){}_var_u=newUser;_console-log(_u_instanceof_User_);//true">示例：function User(){}  var u=newUser;  console.log( u instanceof User );//true</h2><p>constructor是对象的一个属性，不是运算符，constructor属性指向对象的构造函数。</p>
+<p>示例：function User(){}  var u=newUser;  console.log( u.constructor===User);//得到true</p>
+<hr>
+<h3 id="正则表达式">正则表达式</h3><p>疑问1. 实现trim函数,将字符串的开头和结尾的空白键去除.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">trim</span><span class="params">(str)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str.replace(<span class="regexp">/^\s+|\s+$/</span>, <span class="string">''</span>);  <span class="comment">//没有设置全局变量标志g时</span></span><br><span class="line">&#125;   </span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">'   hi!  '</span>;</span><br><span class="line">str = trim(str);</span><br><span class="line"><span class="built_in">console</span>.log(str); <span class="comment">// 'hi!   ' 后面的空格还有</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//加上g后</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">trim</span><span class="params">(str)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str.replace(<span class="regexp">/^\s+|\s+$/g</span>, <span class="string">''</span>);  <span class="comment">//没有设置全局变量标志g时</span></span><br><span class="line">&#125;   </span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">'   hi!  '</span>;</span><br><span class="line">str = trim(str);</span><br><span class="line"><span class="built_in">console</span>.log(str); <span class="comment">// 'hi!' 输出正常</span></span><br></pre></td></tr></table></figure></p>
+<p>全局标志的意义何在?<br> 在创建正则表达式对象时如果使用了“g”标识符或者设置它了的﻿global属性值为ture时，那么新创建的正则表达式对象将使用模式对要将要匹配的字符串进行全局匹配。在全局匹配模式下可以对指定要查找的字符串执行多次匹配。每次匹配使用当前正则对象的lastIndex属性的值作为在目标字符串中开始查找的起始位置。lastIndex属性的初始值为0，找到匹配的项后lastIndex的值被重置为匹配内容的下一个字符在字符串中的位置索引，用来标识下次执行匹配时开始查找的位置。如果找不到匹配的项lastIndex的值会被设置为0。当没有设置正则对象的全局匹配标志时lastIndex属性的值始终为0，每次执行匹配仅查找字符串中第一个匹配的项。</p>
+<p> 简而言之,寻找匹配项就是有一个下标的,一开始都是0,在全局下的话可以多次匹配如果找到一个匹配项,那么下标就更新,下次匹配的时候就从那个新的下标开始.如果不设全局的话,那下标总是从0开始,就总是只能找到第一项匹配项.</p>
+<hr>
+<h2 id="dom篇">dom篇</h2><p>NodeList不是Array.通过document.getElementsByTagName之类获得的NodeList虽然是list,但是不是array,NodeList的下一层直接就是Object了(所以没有很多Array的方法属性)</p>
 
       
     </div>
