@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/css/" style="font-size: 20px;">css</a><a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/javascipt/" style="font-size: 10px;">javascipt</a><a href="/tags/javascript/" style="font-size: 10px;">javascript</a><a href="/tags/jekyll/" style="font-size: 10px;">jekyll</a><a href="/tags/js/" style="font-size: 10px;">js</a><a href="/tags/object-oriented/" style="font-size: 10px;">object-oriented</a><a href="/tags/os/" style="font-size: 10px;">os</a><a href="/tags/pintos/" style="font-size: 20px;">pintos</a><a href="/tags/thinking/" style="font-size: 20px;">thinking</a><a href="/tags/thread/" style="font-size: 10px;">thread</a><a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a><a href="/tags/假期/" style="font-size: 20px;">假期</a><a href="/tags/基本功/" style="font-size: 10px;">基本功</a><a href="/tags/外排序/" style="font-size: 10px;">外排序</a><a href="/tags/布局/" style="font-size: 20px;">布局</a><a href="/tags/数据库/" style="font-size: 20px;">数据库</a><a href="/tags/日常/" style="font-size: 10px;">日常</a><a href="/tags/树结构索引/" style="font-size: 10px;">树结构索引</a><a href="/tags/笔记/" style="font-size: 10px;">笔记</a>
+						<a href="/tags/css/" style="font-size: 20px;">css</a><a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/javascipt/" style="font-size: 10px;">javascipt</a><a href="/tags/javascript/" style="font-size: 10px;">javascript</a><a href="/tags/jekyll/" style="font-size: 10px;">jekyll</a><a href="/tags/js/" style="font-size: 10px;">js</a><a href="/tags/nginx/" style="font-size: 10px;">nginx</a><a href="/tags/object-oriented/" style="font-size: 10px;">object-oriented</a><a href="/tags/os/" style="font-size: 10px;">os</a><a href="/tags/pintos/" style="font-size: 20px;">pintos</a><a href="/tags/thinking/" style="font-size: 20px;">thinking</a><a href="/tags/thread/" style="font-size: 10px;">thread</a><a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a><a href="/tags/假期/" style="font-size: 20px;">假期</a><a href="/tags/基本功/" style="font-size: 10px;">基本功</a><a href="/tags/外排序/" style="font-size: 10px;">外排序</a><a href="/tags/布局/" style="font-size: 20px;">布局</a><a href="/tags/数据库/" style="font-size: 20px;">数据库</a><a href="/tags/日常/" style="font-size: 10px;">日常</a><a href="/tags/服务器/" style="font-size: 10px;">服务器</a><a href="/tags/树结构索引/" style="font-size: 10px;">树结构索引</a><a href="/tags/笔记/" style="font-size: 10px;">笔记</a>
 					</div>
 				</section>
 				
@@ -186,6 +186,67 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-服务器和nginx" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/23/服务器和nginx/" class="article-date">
+  	<time datetime="2015-07-23T13:38:03.000Z" itemprop="datePublished">2015-07-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/23/服务器和nginx/">服务器和nginx</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这几天在帮人在阿里云上面改一个域名下访问多个网页站点,因为那个网站从代码到上线都是给别人外包做的QAQ,所以开始也无从下手…在什么都不懂的摸索过程中,自己对网页开发的后台多了一丢丢的认识.现在来写个小结吧</p>
+<p>服务器其实就是一台24小时都在工作的电脑,你一样给它配系统等等(这些在阿里云那里开始设置的时候弄好),然后你可以远程登陆这台电脑(ubuntu下用ssh命令以root用户登陆),登陆以后可以分下盘,像平时自己电脑一样配置一下环境.</p>
+<p>服务器和虚拟空间<br>服务器相当于就是一台存在的硬件主机了,你在服务器上可以自己通过代理器映射到不同的网站目录下,这些网站目录其实就是相当于虚拟空间,即一个服务器上面可以自己划分很多个虚拟空间</p>
+<p>在网站搭建的过程中,<a href="http://nginx.org/en/docs/beginners_guide.html" target="_blank" rel="external">nginx</a><br>这种反向代理服务器(<a href="http://www.tuicool.com/articles/eiYRbu" target="_blank" rel="external">代理服务器和反向代理服务器的区别</a>)其实很重要的.我感觉它有点像路由,但是它是在服务器中根据ip/域名,路径去映射到不同的网站根目录下的,路由就是根据路径的不一样,采取不同的处理程序</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># .conf</span></span><br><span class="line"><span class="title">server</span> &#123;</span><br><span class="line">    <span class="title">listen</span> <span class="number">8080</span>;</span><br><span class="line">    <span class="title">root</span> /data/up1;</span><br><span class="line">    <span class="title">server_name</span> example.org</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title">server</span> &#123;</span><br><span class="line">    <span class="title">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="title">root</span> /data/up1;</span><br><span class="line">    <span class="title">sever_name</span> example.com</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的配置文件就是nginx的核心部分,每个server相当于一个服务器,listen—监听,root—网站代码所在的根目录,server_name—外部访问域名的名字,location—路径</p>
+<p>这就说明当一个访问请求来到服务器时,实际先要经过这个nginx,将它映射到相应的网站根目录下获取index,在index中的比如<code>&lt;a href=&quot;/&quot;&gt;link&lt;/a&gt;</code>,这样的操作就是将这个访问又隐射到/处(由nginx处理),js代码中有api,里面是通过加’/msq’+router/name,nginx里面也有写这个location(/msq),但是这个不同于”/“这种,它没有获取东西,而是接着这个location来向后台传递信息.</p>
+<p>后台一直在监听(0.0.0.0即全ip),一旦有请求到且要求是以/msq/开头的,就由router映射到不同的处理程序中执行再返回.</p>
+<p>后台的文件不需要一定要放在根目录下的,就任意一个地方执行可以的,达到监听的目的就ok了</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/服务器/">服务器</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-js基础笔记" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -1024,74 +1085,6 @@
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/博客搭建/">博客搭建</a><a class="article-category-link" href="/categories/博客搭建/日记/">日记</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-2015-05-09-notes-dataBase-ch13" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/05/09/2015-05-09-notes-dataBase-ch13/" class="article-date">
-  	<time datetime="2015-05-08T16:00:00.000Z" itemprop="datePublished">2015-05-09</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/09/2015-05-09-notes-dataBase-ch13/">数据库笔记--ch13 外排序</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>为什么需要排序？  数据库中很多操作都需要排序，比如用户需要按一定的次序返回查询结果等等<br>为什么要外排序？  因为数据庞大，当需要排序的数据大到主存无法容纳的时候，就需要采用外排序算法，减少磁盘访问的开销。</p>
-<h2 id="简单的两路归并排序算法">简单的两路归并排序算法</h2><p>段：有序的子文件（段的概念感觉比页要大）<br>当主存不能容纳整个文件是，可以把文件划分为规模较小的子文件，首先对每个子文件进行排序，然后将排序后的子文件合并。假设输入文件的数据页数为2^k，那么第0遍处理生成2^k个长位1个数据页的有序段；第1遍处理生成2^k-1个长位2个数据页的有序段…</p>
-<p>每遍的处理是读入一个数据页，处理，然后写回磁盘。因此对每个数据页需要读写磁盘两次。</p>
-<h2 id="外归并排序">外归并排序</h2><p>对两路归并排序算法有两个重要改进：</p>
-<ol>
-<li>第0遍的处理，每次读入B个数据页，在主存内排序胡生成[N/B]个长为B个数据页的段（两路归并排序中是对每个数据页里面的数进行排序，没有合并的操作,所以出来的段数还是N）</li>
-</ol>
-<p>2 .采取（B-1）路归并，总的遍数位[logB-1 N]+1,两路算法的就是[log2 N]+1，而且B通常较大。<br>（疑问：为什么第0遍的时候就可以用B页，之后的都是B-1页，然后有一页用来做输出，难道一开始的时候不需要有页作为输出吗？是和归并算法有关吗？输出的那页到底是怎样的角色？）</p>
-<p>替换排序算法：一个输入缓冲区，一个输出缓冲区，其余都是当前集，要求只要当前集中有K值比输出缓冲区的最大的那个K值大，就得继续从当前集读到输出缓冲区中，造成的空白位由输入缓冲区的一组填上。</p>
-<h3 id="改进外排序算法：">改进外排序算法：</h3><h4 id="块I/O：">块I/O：</h4><p>  读写的单位变为了缓冲区块，就是说每次读写的数据页的数目变多的话，我们就可以尽量减少对数据处理的遍数，因为算法每遍处理都要读写每个数据页。但是这里有个问题就是，我们选择打的缓冲区块的划，每次归并的<br>（疑问：缓冲区和页的大小有关吗？每次的读写的怎样的？按页读写？那当段大于一页的时候是怎样操作的？）</p>
-<h4 id="双缓冲：">双缓冲：</h4><p>因为当缓冲区块的元组用完时，就要去读入当前序段的下一个缓冲区块，这时候的CPU就空闲状态。<br>解决方法：为每个输入缓冲区分配额外的缓冲区页，当一个区块被读完时CPU的就去读另一个区块的，同时发送I/O请求，读取下一个缓冲区块。</p>
-<h2 id="用B+树来排序">用B+树来排序</h2><p>聚簇索引—-推荐用B+树排序<br>非聚簇索引—-不建议，还不如用外排序算法做</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/外排序/">外排序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/笔记/">笔记</a><a class="article-category-link" href="/categories/笔记/数据库/">数据库</a>
 	</div>
 
 
