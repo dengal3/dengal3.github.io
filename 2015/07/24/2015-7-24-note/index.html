@@ -3,17 +3,35 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: os | ailin</title>
+  <title>2015-7-24 note | ailin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ailin的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ailin">
-<meta property="og:url" content="http://dengal3.github.com/tags/os/index.html">
+  <meta name="description" content="domdom事件流 慕课
+
+事件流: 描述的是从页面中接受事件的顺序(ie事件冒泡(从最内到最外),事件捕获(从内到外))
+事件处理程序:
+html处理程序(比如onclick放在html中)
+dom0级事件处理程序 把一个函数赋值到一个事件的处理程序属性
+dom2级事件处理程序 每个dom里面都有定义了两个方法addEvenListener和removeEventListener,接受三个参数:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2015-7-24 note">
+<meta property="og:url" content="http://dengal3.github.com/2015/07/24/2015-7-24-note/index.html">
 <meta property="og:site_name" content="ailin">
-<meta property="og:description" content="ailin的博客">
+<meta property="og:description" content="domdom事件流 慕课
+
+事件流: 描述的是从页面中接受事件的顺序(ie事件冒泡(从最内到最外),事件捕获(从内到外))
+事件处理程序:
+html处理程序(比如onclick放在html中)
+dom0级事件处理程序 把一个函数赋值到一个事件的处理程序属性
+dom2级事件处理程序 每个dom里面都有定义了两个方法addEvenListener和removeEventListener,接受三个参数:">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ailin">
-<meta name="twitter:description" content="ailin的博客">
+<meta name="twitter:title" content="2015-7-24 note">
+<meta name="twitter:description" content="domdom事件流 慕课
+
+事件流: 描述的是从页面中接受事件的顺序(ie事件冒泡(从最内到最外),事件捕获(从内到外))
+事件处理程序:
+html处理程序(比如onclick放在html中)
+dom0级事件处理程序 把一个函数赋值到一个事件的处理程序属性
+dom2级事件处理程序 每个dom里面都有定义了两个方法addEvenListener和removeEventListener,接受三个参数:">
   
     <link rel="alternative" href="/atom.xml" title="ailin" type="application/atom+xml">
   
@@ -185,51 +203,123 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-2015-7-24-note" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/07/04/Pintos-thread/" class="archive-article-date">
-  	<time datetime="2015-07-04T02:18:11.000Z" itemprop="datePublished">7月 4</time>
+    <div class="article-meta">
+      <a href="/2015/07/24/2015-7-24-note/" class="article-date">
+  	<time datetime="2015-07-24T01:49:04.000Z" itemprop="datePublished">2015-07-24</time>
 </a>
-        </div>
-    	 
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/07/04/Pintos-thread/">Pintos_thread</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2015-7-24 note
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/os/">os</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pintos/">pintos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/thread/">thread</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/notes/">notes</a></li></ul>
 	</div>
 
-          
+        
 
-        </div>
         <div class="clearfix"></div>
-    </header>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="dom">dom</h3><p><a href="http://www.imooc.com/learn/138" target="_blank" rel="external">dom事件流 慕课</a></p>
+<ol>
+<li>事件流: 描述的是从页面中接受事件的顺序(ie事件冒泡(从最内到最外),事件捕获(从内到外))</li>
+<li>事件处理程序:<ol>
+<li>html处理程序(比如onclick放在html中)</li>
+<li>dom0级事件处理程序 把一个函数赋值到一个事件的处理程序属性</li>
+<li>dom2级事件处理程序 每个dom里面都有定义了两个方法addEvenListener和removeEventListener,接受三个参数:要处理的事件名(click),作为事件处理程序的函数,布尔值(true 捕获阶段调用;false 冒泡阶段调用),可以添加多个事件处理程序,ie是用不了dom2事件处理程序的,要用ie它自己的事件处理程序</li>
+<li>IE事件处理程序:attachEvent,detachEvent,接受两个参数:事件处理程序的名称(onclick)和事件处理程序的函数,没有布尔值,因为ie8及之前只支持事件冒泡</li>
+<li>跨浏览器(if,elseif, else)</li>
+</ol>
+</li>
+<li>事件对象:在触发DOM上的事件时都会产生一个对象,里面有很多事件发生的属性,比如鼠标的位置,按键等<br> 在ie8以前的event要通过window.event获取<ol>
+<li>DOM中的对象属性:type—用于获取事件类型(click); target—用于事件发生在的哪个目标上; stopPropagation()—用于阻止事件冒泡过程; preventDefault()—阻止事件的默认行为</li>
+<li>IE中的事件对象:type—用于获取事件类型; srcElement—用于获取事件的目标对象; cancelBublle(bool)—取消冒泡; returnValue()—取消默认行为</li>
+</ol>
+</li>
+</ol>
+<h3 id="java">java</h3><p>union-find</p>
+<p>QuickFindUF:<br>(course)[<a href="http://algs4.cs.princeton.edu/15uf/" target="_blank" rel="external">http://algs4.cs.princeton.edu/15uf/</a>]<br>(并查集(Union-Find)算法介绍)[<a href="http://blog.csdn.net/dm_vincent/article/details/7655764" target="_blank" rel="external">http://blog.csdn.net/dm_vincent/article/details/7655764</a>]</p>
+<p>Ant</p>
+<p>(ant在wiki)[<a href="http://my.ss.sysu.edu.cn/wiki/pages/viewpage.action?pageId=6521013" target="_blank" rel="external">http://my.ss.sysu.edu.cn/wiki/pages/viewpage.action?pageId=6521013</a>]</p>
+
+      
+    </div>
+    
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/07/23/服务器和nginx/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">服务器和nginx</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2015-7-24-note" data-title="2015-7-24 note" data-url="http://dengal3.github.com/2015/07/24/2015-7-24-note/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 </div>
       <footer id="footer">
   <div class="outer">
