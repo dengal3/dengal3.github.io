@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Jquery/" style="font-size: 10px;">Jquery</a><a href="/tags/css/" style="font-size: 20px;">css</a><a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/javascipt/" style="font-size: 10px;">javascipt</a><a href="/tags/javascript/" style="font-size: 10px;">javascript</a><a href="/tags/jekyll/" style="font-size: 10px;">jekyll</a><a href="/tags/js/" style="font-size: 10px;">js</a><a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a><a href="/tags/nginx/" style="font-size: 10px;">nginx</a><a href="/tags/notes/" style="font-size: 10px;">notes</a><a href="/tags/object-oriented/" style="font-size: 10px;">object-oriented</a><a href="/tags/os/" style="font-size: 10px;">os</a><a href="/tags/pintos/" style="font-size: 20px;">pintos</a><a href="/tags/thinking/" style="font-size: 20px;">thinking</a><a href="/tags/thread/" style="font-size: 10px;">thread</a><a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a><a href="/tags/假期/" style="font-size: 20px;">假期</a><a href="/tags/基本功/" style="font-size: 10px;">基本功</a><a href="/tags/外排序/" style="font-size: 10px;">外排序</a><a href="/tags/布局/" style="font-size: 20px;">布局</a><a href="/tags/数据库/" style="font-size: 20px;">数据库</a><a href="/tags/日常/" style="font-size: 10px;">日常</a><a href="/tags/服务器/" style="font-size: 10px;">服务器</a><a href="/tags/树结构索引/" style="font-size: 10px;">树结构索引</a><a href="/tags/源码剖析/" style="font-size: 10px;">源码剖析</a><a href="/tags/笔记/" style="font-size: 10px;">笔记</a>
+						<a href="/tags/Jquery/" style="font-size: 10px;">Jquery</a><a href="/tags/css/" style="font-size: 20px;">css</a><a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/javascipt/" style="font-size: 10px;">javascipt</a><a href="/tags/javascript/" style="font-size: 20px;">javascript</a><a href="/tags/jekyll/" style="font-size: 10px;">jekyll</a><a href="/tags/js/" style="font-size: 10px;">js</a><a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a><a href="/tags/nginx/" style="font-size: 10px;">nginx</a><a href="/tags/notes/" style="font-size: 10px;">notes</a><a href="/tags/object-oriented/" style="font-size: 10px;">object-oriented</a><a href="/tags/os/" style="font-size: 10px;">os</a><a href="/tags/pintos/" style="font-size: 20px;">pintos</a><a href="/tags/setTimeout/" style="font-size: 10px;">setTimeout</a><a href="/tags/thinking/" style="font-size: 20px;">thinking</a><a href="/tags/thread/" style="font-size: 10px;">thread</a><a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a><a href="/tags/假期/" style="font-size: 20px;">假期</a><a href="/tags/基本功/" style="font-size: 10px;">基本功</a><a href="/tags/外排序/" style="font-size: 10px;">外排序</a><a href="/tags/定时器/" style="font-size: 10px;">定时器</a><a href="/tags/布局/" style="font-size: 20px;">布局</a><a href="/tags/数据库/" style="font-size: 20px;">数据库</a><a href="/tags/日常/" style="font-size: 10px;">日常</a><a href="/tags/服务器/" style="font-size: 10px;">服务器</a><a href="/tags/树结构索引/" style="font-size: 10px;">树结构索引</a><a href="/tags/源码剖析/" style="font-size: 10px;">源码剖析</a><a href="/tags/笔记/" style="font-size: 10px;">笔记</a>
 					</div>
 				</section>
 				
@@ -186,6 +186,82 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-2016-03-12-说说有关setTimeout的那些事" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/12/2016-03-12-说说有关setTimeout的那些事/" class="article-date">
+  	<time datetime="2016-03-11T16:00:00.000Z" itemprop="datePublished">2016-03-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/12/2016-03-12-说说有关setTimeout的那些事/">有关setTimeout的那些事</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在看源码的时候遇到这么个问题：setTimeout(func, 0)<br>有经验的人肯定知道这是异步呀，定了个计时器呀，但其实func只是被推到单线程（浏览器中就是js执行和UI渲染是在同一个进程中完成的）等待队列里面，设了个0秒后执行的定时器，然而由于我们线程中有正在执行中的代码，所以并不会马上执行func。这些都是基础部分，而我的问题是，那到底什么时候才执行呢。</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// do somthing</span></span><br><span class="line">    setTimeout(func1, <span class="number">0</span>);</span><br><span class="line">    B();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    setTimeout(func2, <span class="number">0</span>);</span><br><span class="line">    C();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">C</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// do somthing</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码就是我的问题了</p>
+<p><a href="http://imweb.io/topic/56642e21d91952db73b41f52" target="_blank" rel="external">[相关链接]</a><br><a href="http://ejohn.org/blog/how-javascript-timers-work/" target="_blank" rel="external">[相关链接]</a></p>
+<p>相关链接中提到了“js block”，那到底“js block”到底到哪里才算是一个block呢<br>我做了相关实验<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// do somthing</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"A"</span>);</span><br><span class="line">    setTimeout(<span class="string">"console.log('func1')"</span>, <span class="number">0</span>);</span><br><span class="line">    B();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"B"</span>);</span><br><span class="line">    setTimeout(<span class="string">"console.log('func2')"</span>, <span class="number">0</span>);</span><br><span class="line">    C();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">C</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// do somthing</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"C"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">A();</span><br><span class="line"><span class="comment">// 输出：</span></span><br><span class="line"><span class="comment">// A</span></span><br><span class="line"><span class="comment">// B</span></span><br><span class="line"><span class="comment">// C</span></span><br><span class="line"><span class="comment">// func1</span></span><br><span class="line"><span class="comment">// func2</span></span><br></pre></td></tr></table></figure></p>
+<p>猜想一，block是指当前函数的作用域<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// do somthing</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"A"</span>);</span><br><span class="line">    setTimeout(func1, <span class="number">0</span>);</span><br><span class="line">    B();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; <span class="number">1000000</span>; i++);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"func1"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"B"</span>);</span><br><span class="line">    setTimeout(func2, <span class="number">0</span>);</span><br><span class="line">    C();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"func2"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">C</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// do somthing</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"C"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>假设block是指当前函数的作用域，那么我们在B函数结束的时候，定时器里面的func2就会执行了，然而并没有，我们还是会等到A函数中的大循环结束以后才执行B作用域中的定时器里面的函数。说明我们的假设不成立。</p>
+<p>假设二，我们会等到call stack清空以后才执行计时器中的函数。由于我在做这个实验之前在看并实践一个小requirejs异步模块加载器的代码，上面这些实验代码都是放在一个模块里面做的，在ABC这些函数之外还有很多其他的匿名函数在call stack中，设置断点，发现确实是在call stack里面的代码都清空了以后才会执行我们计时器函数。说明我们的假设成立。</p>
+<p>js block是指call stack中全部的js代码。</p>
+<p>然后我去修改了一下定时器的计时时间，希望因此可以知道计时器和它排队的方式。<br>上面的代码的输出没什么疑问<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A</span><br><span class="line">B</span><br><span class="line">C</span><br><span class="line">fu<span class="label">nc1</span></span><br><span class="line">fu<span class="label">nc2</span></span><br></pre></td></tr></table></figure></p>
+<p>func1和func2都是马上放到队列中，两者的时间都是定了0，func1先设置，根据”队列“这样的字眼，我们就知道应该是先进先出的顺序，因此func1先执行，func2后执行。</p>
+<p>同样的如果把两者的时间设为2， 5， 10或100，结果也是一样的。</p>
+<p>然后我们做出一个尝试，我们把func1的执行时间定在1ms后，func2的不变还是0，我们运行查看结果<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A</span><br><span class="line">B</span><br><span class="line">C</span><br><span class="line">fu<span class="label">nc1</span></span><br><span class="line">fu<span class="label">nc2</span></span><br></pre></td></tr></table></figure></p>
+<p>仍然和之前的输出一样，然后我们把func1的执行时间定为2ms，func2改为1ms，总之就是要让他们的时间差保持为1ms<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A</span><br><span class="line">B</span><br><span class="line">C</span><br><span class="line">fu<span class="label">nc2</span></span><br><span class="line">fu<span class="label">nc1</span></span><br></pre></td></tr></table></figure></p>
+<p>输出结果发生了改变，真是见鬼了。我们继续保持1ms的时间差，调不同的基数10,100，1000做实验，然后之后这些输出都是<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A</span><br><span class="line">B</span><br><span class="line">C</span><br><span class="line">fu<span class="label">nc2</span></span><br><span class="line">fu<span class="label">nc1</span></span><br></pre></td></tr></table></figure></p>
+<p>之后的输出确实是符合我们想要的，func1等1000ms，func2等1001ms执行，虽然他们设定计时器的时间点不一样，但是由于程序运行的时间足够快，所以他们设定时间点的差会略小于1ms，但是应该是会大于0ms的。</p>
+<p>为了验证这点，我们在他们设定定时器之间的这段时间插入一段很大的循环，使得他们设定计时器的时间差大于1ms<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// do somthing</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"A"</span>);</span><br><span class="line">    setTimeout(func1, <span class="number">2</span>);</span><br><span class="line">    <span class="comment">// add loop</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; <span class="number">1000000</span>; i++);</span><br><span class="line">    B();</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"func1"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"B"</span>);</span><br><span class="line">    setTimeout(func2, <span class="number">1</span>);</span><br><span class="line">    C();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"func2"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">C</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// do somthing</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"C"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>果然输出和我们预想一样<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A</span><br><span class="line">B</span><br><span class="line">C</span><br><span class="line">fu<span class="label">nc1</span></span><br><span class="line">fu<span class="label">nc2</span></span><br></pre></td></tr></table></figure></p>
+<p>(为了减少打字A/a:表示A函数在ams以后执行)<br>所以现在我们的疑问是集中在，为什么func1/1,func2/0和func1/2,func2/3,func1/11,func2/12这些的输出结果不一样，他们同样都是相差1ms呀</p>
+<p>嗯。。然后我就去stack overflow去问了这个问题了，但是还没有人回答，等到有回答了再更ORZ。</p>
+<p>对了这里顺便说一下setTimeout和setInterval的区别。<br>setTimeout去实现像setInterval这样的功能的时候的思路就是在回调函数再调用setTimeout，而setInterval就是一开始设置了就之后每隔一段时间去跑回调函数就好了。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// do something here</span></span><br><span class="line">        setTimeout(loop, <span class="number">1000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// do something</span></span><br><span class="line">&#125;</span><br><span class="line">setInterval(doSomething, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure></p>
+<p>看上去两者好像没什么区别，但是就在我们刚刚讨论的时候就提到了浏览器中是单线程的，这里就会存在”事情太多了，定时器时间到了，但是前面的事情还没做好，还轮不到我去执行“这样的情景。在这样的情景中，setTimeout因为每次新的设置定时器都是在前一个定时器的回调函数触发了以后设置的，所以这个可以保证会以1， 2， 3这样的顺序进行。然而setInterval是不负责任的，它不管队列中是否还有没有执行的前面的函数，它一到时间就把这个回调函数推到队列中，又因为队列不允许有相同的setInterval的函数同时在一个队列中，所以假设1还没有执行，推了2进队列，那么2将会被abort，setInterval一到时间就会推3进去，不管死活，这样就可能会导致我们的程序出错了。</p>
+<p>就个人而言还是比较喜欢setTimeout：p</p>
+<p>近期目标：<br>看源码，小框架的实现，可以试下造下轮子？（jquery插件或者chrome插件）<br>（ife的高级任务：mvvm表格实现）</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/setTimeout/">setTimeout</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/定时器/">定时器</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-2016-03-06-Jquery源码之jsonp" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -1030,88 +1106,6 @@
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascipt/">javascipt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/object-oriented/">object-oriented</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/thinking/">thinking</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/tech-diary/">tech-diary</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-2015-05-24-install-pintos-on-ubuntu14-04" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/05/24/2015-05-24-install-pintos-on-ubuntu14-04/" class="article-date">
-  	<time datetime="2015-05-24T15:05:46.000Z" itemprop="datePublished">2015-05-24</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/24/2015-05-24-install-pintos-on-ubuntu14-04/">install-pintos-on-ubuntu14.04</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="在ubuntu14-04下安装pintos">在ubuntu14.04下安装pintos</h2><h3 id="具体步骤">具体步骤</h3><ol>
-<li>安装gcc,perl,make,autoconf,用<br><code>$ sudo apt-get intsall</code><br> 因为之前系统就装好了gcc，perl，make还有autoconf，所以这里都没有什么问题</li>
-<li>然后就将下载的两个压缩包解压，得到bochs-2.6.7还有pintos两个文件夹</li>
-<li>在终端下进入bochs-2.6.7文件夹<br> <img src="/images/2015-05-25/pintos0.png" alt="pic0"></li>
-<li>设置bochs属性<br><code>$ ./configure --with-no-gui --enable-gdb-stub</code></li>
-<li>在该目录下<br><code>$ sudo make install</code><br> <img src="/images/2015-05-25/pintos1.png" alt="pic1"></li>
-<li>在当目录<code>$ bochs</code>,测试<br> <img src="/images/2015-05-25/pintos2.png" alt="pic2"><br> 这里出现了问题：大致的意思是指不能模拟出这个cpu</li>
-<li>我们在当前目录下<code>$ bochs -help cpu</code>,然后就会看到有一列该bochs支持的cpu模式</li>
-<li>这个时候我们就要<code>$ gedit .bochsrc</code>,将里面有一段是model：core2_penryn_t9600把后面一个换为刚刚列表显示</li>
-<li>的一个，将刚刚的步骤重新来一遍</li>
-<li>然后在再次<code>$ bochs</code>的时候你就会发现有lower sound support之类的错误出现。这个时候你就在目录下<br><code>$ ./configure --with-nogui --enable-gdb-stub --enable-sb16</code>，再次<code>$ sudo make install</code></li>
-<li>这次就没有问题啦</li>
-</ol>
-<h3 id="bochs安装好了，现在开始pintos安装部分">bochs安装好了，现在开始pintos安装部分</h3><ol>
-<li>进入~路径下<br><code>$ cd ~</code></li>
-<li>编辑这个目录下的.profile文件，设置环境变量<br> <img src="/images/2015-05-25/pintos4.png" alt="pic4"></li>
-<li>退出后<code>$ source .profile</code>,使.profile生效</li>
-<li>在~下<code>$ pintos</code>,出来的结果为上面图的右边终端显示</li>
-<li>这时候就进入pintos文件夹下的<code>src/util</code>,修改该目录下的<code>Makefile</code><br><img src="/images/2015-05-25/pintos5.png" alt="pic5"></li>
-<li>保存后，执行<br><code>$ make</code></li>
-<li>然后我们进入到<code>src/thread</code>的目录下，输入命令<code>$ make</code>,此时会产生<code>build</code>文件</li>
-<li>进入<code>build</code>文件，执行<br><code>$ make check</code><br><img src="/images/2015-05-25/pintos6.png" alt="pic6"></li>
-<li>然后执行<br><code>$ pintos run alarm-multiple</code><br><img src="/images/2015-05-25/pintos7.png" alt="pic7"></li>
-</ol>
-<h3 id="安装完成">安装完成</h3><h3 id="实验中遇到的问题">实验中遇到的问题</h3><p>好像TA教程没有写要设置config,但其实这个还是需要的，不然的话之后会有一个很<br>丑陋的gui，不过这也不是什么大问题，去bochs那里重新设置一下就好了</p>
-<h3 id="实验心得">实验心得</h3><p>一切还是比较顺利的,并没有遇到什么大问题:)</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pintos/">pintos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
 	</div>
 
       
