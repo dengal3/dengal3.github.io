@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>从setTimeout看event loop | ailin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近发现如果不写博客的话,看资料的效率会降低…所以我要多记录一下才行了。最近在知乎上面看到一个很好的问题和答案。Promise的队列与setTimeout的队列的有何关联最高票的答案写得很好。我简单地做一个重点的记录。
+题主的问题在于同时用setTimeout和promise的时候，谁先谁后的问题，以及就是promise的注册回调问题（同步还是异步），这些问题都集中到了event loop上面。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从setTimeout看event loop">
+<meta property="og:url" content="http://dengal3.github.com/2016/03/20/2016-03-20-More-About-setTimeout-and-event-loop/index.html">
+<meta property="og:site_name" content="ailin">
+<meta property="og:description" content="最近发现如果不写博客的话,看资料的效率会降低…所以我要多记录一下才行了。最近在知乎上面看到一个很好的问题和答案。Promise的队列与setTimeout的队列的有何关联最高票的答案写得很好。我简单地做一个重点的记录。
+题主的问题在于同时用setTimeout和promise的时候，谁先谁后的问题，以及就是promise的注册回调问题（同步还是异步），这些问题都集中到了event loop上面。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从setTimeout看event loop">
+<meta name="twitter:description" content="最近发现如果不写博客的话,看资料的效率会降低…所以我要多记录一下才行了。最近在知乎上面看到一个很好的问题和答案。Promise的队列与setTimeout的队列的有何关联最高票的答案写得很好。我简单地做一个重点的记录。
+题主的问题在于同时用setTimeout和promise的时候，谁先谁后的问题，以及就是promise的注册回调问题（同步还是异步），这些问题都集中到了event loop上面。">
+  
+    <link rel="alternative" href="/atom.xml" title="ailin" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/logo.jpg">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="images/logo.jpg" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">ailin</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">其实这是流水账</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/dengal3" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/1793490742" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/dengal" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Jquery/" style="font-size: 10px;">Jquery</a><a href="/tags/chrome-extension/" style="font-size: 10px;">chrome extension</a><a href="/tags/css/" style="font-size: 20px;">css</a><a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/javascipt/" style="font-size: 10px;">javascipt</a><a href="/tags/javascript/" style="font-size: 20px;">javascript</a><a href="/tags/jekyll/" style="font-size: 10px;">jekyll</a><a href="/tags/js/" style="font-size: 20px;">js</a><a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a><a href="/tags/nginx/" style="font-size: 10px;">nginx</a><a href="/tags/notes/" style="font-size: 10px;">notes</a><a href="/tags/object-oriented/" style="font-size: 10px;">object-oriented</a><a href="/tags/os/" style="font-size: 10px;">os</a><a href="/tags/pintos/" style="font-size: 20px;">pintos</a><a href="/tags/setTimeout/" style="font-size: 10px;">setTimeout</a><a href="/tags/thinking/" style="font-size: 20px;">thinking</a><a href="/tags/thread/" style="font-size: 10px;">thread</a><a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a><a href="/tags/假期/" style="font-size: 20px;">假期</a><a href="/tags/基本功/" style="font-size: 10px;">基本功</a><a href="/tags/外排序/" style="font-size: 10px;">外排序</a><a href="/tags/学习记录/" style="font-size: 10px;">学习记录</a><a href="/tags/定时器/" style="font-size: 10px;">定时器</a><a href="/tags/布局/" style="font-size: 20px;">布局</a><a href="/tags/数据库/" style="font-size: 20px;">数据库</a><a href="/tags/日常/" style="font-size: 10px;">日常</a><a href="/tags/服务器/" style="font-size: 10px;">服务器</a><a href="/tags/树结构索引/" style="font-size: 10px;">树结构索引</a><a href="/tags/浏览器原理/" style="font-size: 10px;">浏览器原理</a><a href="/tags/源码剖析/" style="font-size: 10px;">源码剖析</a><a href="/tags/笔记/" style="font-size: 10px;">笔记</a><a href="/tags/面试/" style="font-size: 10px;">面试</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://daixuan.me">DX的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://54017.github.io">017的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">你希望能看到什么?</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">ailin</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="images/logo.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">ailin</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">其实这是流水账</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/dengal3" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/1793490742" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/dengal" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-2016-03-20-More-About-setTimeout-and-event-loop" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/20/2016-03-20-More-About-setTimeout-and-event-loop/" class="article-date">
+  	<time datetime="2016-03-19T16:00:00.000Z" itemprop="datePublished">2016-03-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      从setTimeout看event loop
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/浏览器原理/">浏览器原理</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近发现如果不写博客的话,看资料的效率会降低…所以我要多记录一下才行了。<br>最近在知乎上面看到一个很好的问题和答案。<br><a href="https://www.zhihu.com/question/36972010" target="_blank" rel="external">Promise的队列与setTimeout的队列的有何关联</a><br>最高票的答案写得很好。我简单地做一个重点的记录。</p>
+<p>题主的问题在于同时用setTimeout和promise的时候，谁先谁后的问题，以及就是promise的注册回调问题（同步还是异步），这些问题都集中到了event loop上面。</p>
+<p><a href="http://www.w3.org/TR/html5/webappapis.html#event-loops" target="_blank" rel="external">w3c文档中event-loops介绍</a><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">To coordinate events, user interaction, scripts, rendering, networking, and so forth, user agents must <span class="operator"><span class="keyword">use</span> <span class="keyword">event</span> loops <span class="keyword">as</span> described <span class="keyword">in</span> this <span class="keyword">section</span>.</span><br><span class="line"></span><br><span class="line">An <span class="keyword">event</span> loop has one <span class="keyword">or</span> more task queues. A task queue <span class="keyword">is</span> an ordered list <span class="keyword">of</span> tasks, which <span class="keyword">are</span> algorithms that <span class="keyword">are</span> responsible <span class="keyword">for</span> such <span class="keyword">work</span> <span class="keyword">as</span>:</span><br><span class="line"></span><br><span class="line"><span class="keyword">Events</span></span><br><span class="line">Asynchronously dispatching an <span class="keyword">Event</span> object <span class="keyword">at</span> a particular EventTarget object <span class="keyword">is</span> often done <span class="keyword">by</span> a dedicated task.</span><br><span class="line"></span><br><span class="line"><span class="keyword">Not</span> <span class="keyword">all</span> <span class="keyword">events</span> <span class="keyword">are</span> dispatched <span class="keyword">using</span> the task queue, many <span class="keyword">are</span> dispatched synchronously during other tasks.</span><br><span class="line"></span><br><span class="line">Parsing</span><br><span class="line">The HTML parser tokenizing one <span class="keyword">or</span> more bytes, <span class="keyword">and</span> <span class="keyword">then</span> processing <span class="keyword">any</span> resulting tokens, <span class="keyword">is</span> typically a task.</span><br><span class="line"></span><br><span class="line">Callbacks</span><br><span class="line">Calling a callback asynchronously <span class="keyword">is</span> often done <span class="keyword">by</span> a dedicated task.</span><br><span class="line"></span><br><span class="line"><span class="keyword">Using</span> a resource</span><br><span class="line"><span class="keyword">When</span> an algorithm fetches a resource, <span class="keyword">if</span> the fetching occurs asynchronously <span class="keyword">then</span> the processing <span class="keyword">of</span> the resource once <span class="keyword">some</span> <span class="keyword">or</span> <span class="keyword">all</span> <span class="keyword">of</span> the resource <span class="keyword">is</span> available <span class="keyword">is</span> performed <span class="keyword">by</span> a task.</span><br><span class="line"></span><br><span class="line">Reacting <span class="keyword">to</span> DOM manipulation</span><br><span class="line"><span class="keyword">Some</span> elements have tasks that <span class="keyword">trigger</span> <span class="keyword">in</span> response <span class="keyword">to</span> DOM manipulation, e.g. <span class="keyword">when</span> that element <span class="keyword">is</span> inserted <span class="keyword">into</span> the document.</span></span><br></pre></td></tr></table></figure></p>
+<p>上面提到的是一个浏览器上下文就会有一个event loop,一个event loop至少对应一个浏览器上下文，如果一个event loop的所有浏览器上下文都没了，event loop也会消失。</p>
+<p>一个event loop会有一个或多个任务队列，一个任务队列是有序的，里面包括的任务有：事件（点击等类似事件），解析（html parser解析数据），回调，获取资源（发送请求什么的），dom（插入dom等）</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">When <span class="operator">a</span> user agent is <span class="built_in">to</span> queue <span class="operator">a</span> task, <span class="keyword">it</span> must <span class="built_in">add</span> <span class="operator">the</span> given task <span class="built_in">to</span> <span class="constant">one</span> <span class="operator">of</span> <span class="operator">the</span> task queues <span class="operator">of</span> <span class="operator">the</span> relevant event loop.</span><br><span class="line"></span><br><span class="line">Each task is defined <span class="keyword">as</span> coming <span class="built_in">from</span> <span class="operator">a</span> specific task source. All <span class="operator">the</span> tasks <span class="built_in">from</span> <span class="constant">one</span> particular task source <span class="operator">and</span> destined <span class="built_in">to</span> <span class="operator">a</span> particular event loop (e.g. <span class="operator">the</span> callbacks generated <span class="keyword">by</span> timers <span class="operator">of</span> <span class="operator">a</span> Document, <span class="operator">the</span> events fired <span class="keyword">for</span> mouse movements over that Document, <span class="operator">the</span> tasks queued <span class="keyword">for</span> <span class="operator">the</span> parser <span class="operator">of</span> that Document) must always be added <span class="built_in">to</span> <span class="operator">the</span> same task queue, but tasks <span class="built_in">from</span> different task sources may be placed <span class="operator">in</span> different task queues.</span><br></pre></td></tr></table></figure>
+<p>这里就是明白地指出每个任务都会被记录它来自哪个任务源，来自同一个的任务源的任务都会去同一个任务队列，但是这里没有说明同一个任务队列是否可以有不同的任务源，这些队列是有一定的优先级的。</p>
+<p>知乎上的高票答案继续提到了promise的相关。<br>其中promise是microtask,setTimeout的是marcoTask，任务队列的顺序是去了<strong>一个</strong>marcoTask执行完毕，就把microTask中的所有任务都执行完。</p>
+<ul>
+<li><p>marcoTask: script(整体代码),setTimeout,setInterval,setImmediate,I/O,UI rendering</p>
+</li>
+<li><p>microTask: process.nextTick, Promises, Object.observe,MutationObserver</p>
+</li>
+</ul>
+<p>所以promise会比setTimeout中的回调函数早执行。</p>
+<p>综上，我对event loop的个人认识是：event loop是在执行完一个任务以后就从任务队列中取出下一个任务，这个任务队列实际上是有两条队列的，一条是macroTask队列，一条是microTask队列，取了一个macroTask执行完了以后任务将会是整个microTask队列里面的事件（你在microTask中的一个任务继续增加microTask，新增microTask也会在前面的microTask执行完了以后执行，所以不断新增microTask会带来marcoTask被阻塞的现象），将所有microTask事件都执行完了以后再去执行下一个marcoTask，如此往复。</p>
+<p>其中marcoTask里面会分script(整体代码),setTimeout,setInterval,setImmediate,I/O,UI rendering，microTask里面会分process.nextTick, Promises, Object.observe,MutationObserver，队列里面也会有优先级的，具体的细节就不继续了。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/24/2016-03-24-关于面试中一些有意思的题目简单整理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          面试中遇到的一些有意思的问题整理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/19/2016-03-19-记录马克儿/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">记录马克儿</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2016-03-20-More-About-setTimeout-and-event-loop" data-title="从setTimeout看event loop" data-url="http://dengal3.github.com/2016/03/20/2016-03-20-More-About-setTimeout-and-event-loop/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 ailin
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>
