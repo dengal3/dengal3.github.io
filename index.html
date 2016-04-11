@@ -187,6 +187,142 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-2016-04-10-MVVM学习" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/12/2016-04-10-MVVM学习/" class="article-date">
+  	<time datetime="2016-04-11T16:16:20.286Z" itemprop="datePublished">2016-04-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: “mvvm学习”<br>date: 2016-04-10<br>tags:</p>
+<ul>
+<li>框架</li>
+<li>js</li>
+<li><h1 id="mvvm">mvvm</h1></li>
+</ul>
+<p>最近想做百度前端学院很久之前布置的那个mvvm表单框架，但是想了挺久，总是感觉还是有些地方不对劲，代码也是写了又删，所以还是决定多看一下资料再去写。</p>
+<p>因为之前写todo的时候用的是模拟mvc框架的工作流程来写的，中间发现了一个问题就是如果view中的数据是相互绑定的话，在mvc也是会再次通过controller到model，然后在model那里触发另一个view模块下的改变，其实这是很没有必要的。</p>
+<p>mvvm框架的一个常见的功能就是数据的双向绑定，即多个绑定的view之间是相互触发的，这是由viewmodel来提供这个功能的。</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//      [<span class="atom">view</span>]  [<span class="atom">view</span>] [<span class="atom">view</span>]</span><br><span class="line">//         |      |       |</span><br><span class="line">//      [       <span class="atom">viewModel</span>            ]</span><br><span class="line">//              |       |</span><br><span class="line">//          [<span class="atom">model</span>]    [<span class="atom">model</span>]</span><br></pre></td></tr></table></figure>
+<p>在我眼里，mvvm就是这样的架构。只是viewmodel不同于传统的mvc中的c，viewmodel还兼顾了view与view之间的数据绑定。</p>
+<p>这里就要提及一般mvvm框架中常用的方法</p>
+<ul>
+<li>Object.defineProperties</li>
+<li>Mututaion Observer<br>前者是用来做model到view的，后者是用来做view到默认的</li>
+</ul>
+<p>【未完待续】</p>
+<p>相关链接：</p>
+<ul>
+<li><a href="http://gejiawen.github.io/2015/04/02/2-way-data-binding-and-define-property/" target="_blank" rel="external">JS中的双向数据绑定及Object.defineProperty方法</a></li>
+<li><a href="http://imweb.io/topic/56d40adc0848801a4ba198ce" target="_blank" rel="external">不会Object.defineProperty你就out了</a></li>
+<li><a href="https://addyosmani.com/blog/understanding-mvvm-a-guide-for-javascript-developers/" target="_blank" rel="external">Understanding MVVM - A Guide For JavaScript Developers</a></li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-2016-04-06-git安装和管理" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/06/2016-04-06-git安装和管理/" class="article-date">
+  	<time datetime="2016-04-06T14:36:18.552Z" itemprop="datePublished">2016-04-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="git和bug管理系统_安装和学习报告">git和bug管理系统 安装和学习报告</h3><h4 id="1-_git安装">1. git安装</h4><h5 id="1-1_在Linux上安装git">1.1 在Linux上安装git</h5><p>通过一条命令直接完成git的安装<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-<span class="keyword">get</span> install git</span><br></pre></td></tr></table></figure></p>
+<h5 id="1-2_在windows上安装git">1.2 在windows上安装git</h5><p>msysgit是Windows版的Git，从<a href="http://msysgit.github.io/" target="_blank" rel="external">http://msysgit.github.io/</a>下载，然后按默认选项安装即可。</p>
+<p>安装完成后，在开始菜单里找到“Git”-&gt;“Git Bash”，蹦出一个类似命令行窗口的东西，就说明Git安装成功！</p>
+<p>在安装完成以后,还需要设置好配置,在命令行下输入<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user<span class="class">.name</span> <span class="string">"Your Name"</span></span><br><span class="line">$ git config --global user<span class="class">.email</span> <span class="string">"email@example.com"</span></span><br></pre></td></tr></table></figure></p>
+<p>因为Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址。</p>
+<p><strong><code>git config</code> 中使用了 <code>--global</code> 参数,这表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址.</strong></p>
+<p>[相关连接]<br><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137396287703354d8c6c01c904c7d9ff056ae23da865a000" target="_blank" rel="external">安装git - 廖雪峰的网站</a></p>
+<h4 id="2-_git管理的概述和基本应用">2. git管理的概述和基本应用</h4><pre><code>为了我们之后更好地理解我们在git下的操作,我们会简单地介绍一下git能为我们做什么,我们怎么利用这些功能来管理我们的代码的。
+</code></pre><p>git系统里，本地就是远程服务器的一个镜像，所有git里的分支，本地和远程都各有一份，这个需要明确，push的时候会把本地分支推送到服务器。 </p>
+<p><img src="/home/ailin/图片/git/01.jpg" alt=""></p>
+<p>每个客户端都有一个服务器端的镜像，这里可以在本地进行一切版本控制的操作，完成后推送到服务器端合并。</p>
+<p><strong>————————上面讲的是远程和本地的关系，下面要讲的是在本地管理的比较重要的概念。————————-</strong></p>
+<h5 id="工作区和暂存区">工作区和暂存区</h5><p><img src="/home/ailin/图片/git/02.jpg" alt=""></p>
+<p>我们修改文件是在工作区，就是我们的工作目录，调用 <code>git add</code> 命令将其修改加入暂存区，没有进入版本库，当你觉得所有的东西都修改完后，可以调用 <code>git commit</code> 提交至本地的版本库。</p>
+<p>这样，我们本地的版本库就会发生改变了。但是其他成员看不到你的修改的，所以我们就需要 <code>git push</code> 把本地的版本库推送至远程版本库中。这里也就会涉及到代码发生冲突的情况，当代码在推送到远程版本库时发现我们的本地代码和现在远程版本库中的代码发生了冲突， 那么这个时候就需要我们 <code>git pull</code> 之后看看哪里发生冲突，然后手动修改冲突的地方再 <code>add commit push</code> ，当然这中间还可能会有版本回退，删除等问题。</p>
+<p>[相关连接]<br><a href="http://dlutwuwei.github.io/2014/05/21/git%E4%BD%BF%E7%94%A8%E6%A6%82%E8%BF%B0/" target="_blank" rel="external">git使用概述</a></p>
+<h5 id="分支管理">分支管理</h5><pre><code>分支在实际中有什么用呢？
+假设你准备开发一个新功能，但是需要两周才能完成，第一周你写了<span class="number">50</span><span class="comment">%的代码</span>
+如果立刻提交，由于代码还没写完，不完整的代码库会导致别人不能干活了。
+如果等代码全部写完再一次提交，又存在丢失每天进度的巨大风险。
+现在有了分支，就不用怕了。
+你创建了一个属于你自己的分支.别人看不到，还继续在原来的分支上正常工作，
+而你在自己的分支上干活，想提交就提交，直到开发完毕后，再一次性合并到原来的分支上，
+这样，既安全，又不影响别人工作。
+</code></pre><p>我们在实际开发中应该要有有master，dev这些分支，我们在本地可以另外自己开各种分支处理bug或者开发功能等等，然后在确定推送到本地版本库以后再推送到dev开发分支去。</p>
+<p>当在dev的推送中发生冲突的时候就和上面的冲突管理类似，通过git pull手动修改好冲突的地方然后再次推送就好了。</p>
+<p>其中也有谈到我们对bug的处理，一般就是在本地开一个bug的分支处理好了以后再合并到原分支并且删除bug分支即可。同时我们也可以利用git的issue来记录bug处理等等。</p>
+<p>利用分支，多人协作的工作模式通常是这样：</p>
+<ol>
+<li>首先，可以试图用git push origin branch-name推送自己的修改；</li>
+<li>如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；</li>
+<li>如果合并有冲突，则解决冲突，并在本地提交；</li>
+<li>没有冲突或者解决掉冲突后，再用git push origin branch-name推送就能成功！</li>
+<li>如果git pull提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建，用命令git branch —set-upstream branch-name origin/branch-name。</li>
+</ol>
+<p>更多详情请戳链接。</p>
+<p>[相关连接]</p>
+<p><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375840038939c291467cc7c747b1810aab2fb8863508000" target="_blank" rel="external">分支管理 - 廖雪峰的网站</a></p>
+<p><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013760174128707b935b0be6fc4fc6ace66c4f15618f8d000" target="_blank" rel="external">多人协作 - 廖雪峰的网站</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-2016-03-24-关于面试中一些有意思的题目简单整理" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -827,235 +963,9 @@
 
 
   
-    <article id="post-关于css布局的一些疑问记录" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/10/关于css布局的一些疑问记录/" class="article-date">
-  	<time datetime="2015-07-10T08:02:04.000Z" itemprop="datePublished">2015-07-10</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/10/关于css布局的一些疑问记录/">关于css的一些疑问记录</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>有关实践的代码放到了codepen上面,<a href="http://codepen.io/d-ailin/pen" target="_blank" rel="external">链接</a></p>
-<p></p><p data-height="268" data-theme-id="0" data-slug-hash="WvJojP" data-default-tab="result" data-user="d-ailin" class="codepen">See the Pen <a href="http://codepen.io/d-ailin/pen/WvJojP/" target="_blank" rel="external">basic layout</a> by ailin (<a href="http://codepen.io/d-ailin" target="_blank" rel="external">@d-ailin</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
-<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
-
-<p>第一个是用两种方法实现居中效果</p>
-<ol>
-<li>我感觉margin:auto应该是最常用,正规的了</li>
-<li>设置为display:inline-block,外层包一个,设置text-algin:center</li>
-</ol>
-<p>第二个是用了三种方法实现两列布局(左列宽度不变,右列宽度自适应,听说这是叫双翼布局)</p>
-<ol>
-<li>用的经典的float,但是有个注意的点就是一开始float以后看上去就ok了,其实蓝色div是有一部分”埋”在了红div的底下的,这个不是正确的布局,这个时候的右列要设一个margin-right</li>
-<li>用了relative-absolute经典定位</li>
-<li>用了flex-box做布局</li>
-</ol>
-<p>第三个是用两种方法实现三列布局(左右列的宽度都不变,中间的宽度自适应,这个叫圣杯布局…)</p>
-<ol>
-<li>浮动布局</li>
-<li>relative-absolute定位布局</li>
-<li><strong>用负的margin实现</strong><br> 个人认识:负margin是个很神奇的东西,它还可以和float还有position一起合作.它可以通过margin设为负,使得下面一行的快元素可以退回到上面一行中,但这又是在文档流中的,所以不会引起像float引起的对外面元素的一些影响.感觉很不错.<br> <a href="http://chen106106.iteye.com/blog/1631865" target="_blank" rel="external">通过圣杯布局认识负margin的作用</a><br> <a href="http://www.tuicool.com/articles/zYz2Iz" target="_blank" rel="external">负margin对布局的作用</a></li>
-</ol>
-<p>第四个是浮动布局</p>
-<ol>
-<li>浮动布局</li>
-<li>display:inline-block</li>
-</ol>
-<hr>
-<p><strong>Q&amp;A</strong></p>
-<ol>
-<li><p>在三列布局的方法2的实现中,如果div-b和div-c的位置不一样,实现的效果会不一样.其中div-a设置的<code>float:left</code>,div-c设置的<code>float:right</code>,他们的宽度都是设成80px的,所以中间的div-b的设置的<code>margin-left:80px, margin-right: 80px</code>,按理说float流和文本流之间没有冲撞的(文字围绕除外),但是如果将div-c放在div-b的后面的话,div-c就会出现在div-a,div-b的下面一行的右边,是div-b的margin-right影响到了div-c的float了吗?但是为什么div-a就不会受到影响呢?(这个应该是因为div-a先于div-b的,这个经过了实验验证的,当div-a后于div-b布局时,也会出现在下面一行中)?那float其实就是会受到正常文本流的margin影响的咯?(我觉得这个疑问应该要深入了解一下css的规则手册有个float和margin的实现计算,之后再更新)</p>
-</li>
-<li><p>min-width —&gt; 滚动条</p>
-</li>
-<li>gradient css属性</li>
-<li>实现多列高度自适应(这个是负margin的应用,其实布局很多都可以用负margin来实现)<br> padding是用来<br><a href="http://blog.sina.com.cn/s/blog_866347270100yl5t.html" target="_blank" rel="external">链接</a><br><a href="http://www.cnblogs.com/2050/archive/2012/08/13/2636467.html#2457812" target="_blank" rel="external">奇淫异术负边距</a><br>总结: margin是负责模块外的布局,padding是负责内容方面的,这里还要要求双方的内容高度不是0,这个可以通过在after插入content解决</li>
-</ol>
-<p>总结:布局可以有很多方式完成,主要有</p>
-<ol>
-<li>浮动定位</li>
-<li>绝对定位</li>
-<li>利用负margin定位</li>
-</ol>
-<p>当然有很多居中问题要解决,常用的有</p>
-<ol>
-<li>margin:auto</li>
-<li>设为display: inline-block以后,在父元素一层设text-algin: center</li>
-<li>line-height == height</li>
-</ol>
-<p>有时不知为何会出现空隙..此时要float一下空隙就没了</p>
-<p>设置height:100% 时会失效<br>解决方法:</p>
-<ol>
-<li>100%这个百分比是要相对于父元素来讲的,父元素没有设置height的话,有可能就会失效</li>
-<li>html和body也要设置好百分比100%</li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基本功/">基本功</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/布局/">布局</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-CSS的布局" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/09/CSS的布局/" class="article-date">
-  	<time datetime="2015-07-09T07:50:09.000Z" itemprop="datePublished">2015-07-09</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/09/CSS的布局/">CSS的布局</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="行高">行高</h3><p><a href="http://www.cnblogs.com/fengzheng126/archive/2012/05/18/2507632.html" target="_blank" rel="external">深入了解line-height</a></p>
-<hr>
-<h3 id="盒子模型">盒子模型</h3><p>从内到外是:内容,padding,border和margin<br>注意:width一般都只是指内容的宽度,元素的实际表现出来的宽度大小往往是内容的width+padding+border-width</p>
-<hr>
-<h3 id="基本布局模型:">基本布局模型:</h3><ol>
-<li>流动模型(基本默认)</li>
-<li>浮动模型(float)</li>
-<li>层模型(layout)</li>
-</ol>
-<p><strong>流动模型</strong><br>特征:</p>
-<ol>
-<li>块状元素都会在所处的包含元素自上而下按顺序垂直延伸分布,默认下块状元素的宽度都是100%</li>
-<li>内联元素都是在所处的包含元素内从左到右水平分布显示</li>
-</ol>
-<p><strong>浮动模型</strong><br>本质意图就是要让内容不要独占一行,使内容并排显示</p>
-<p><strong>层模型</strong></p>
-<ol>
-<li>绝对定位(absolute)</li>
-<li>相对定位(relative)</li>
-<li>固定定位(fixed)</li>
-</ol>
-<p><strong>绝对定位</strong><br>这条语句的作用将元素从文档流中拖出来，然后使用left、right、top、bottom属性相对于其最接近的一个具有定位属性的父包含块进行绝对定位。如果不存在这样的包含块，则相对于body元素，即相对于浏览器窗口</p>
-<p><strong>相对定位</strong><br>它通过left、right、top、bottom属性确定元素在正常文档流中的偏移位置。相对定位完成的过程是首先按static(float)方式生成一个元素(并且元素像层一样浮动了起来)，然后相对于以前的位置移动，移动的方向和幅度由left、right、top、bottom属性确定，偏移前的位置保留不动。</p>
-<p><strong>固定定位</strong><br>表示固定定位，与absolute定位类型类似，但它的相对移动的坐标是视图（屏幕内的网页窗口）本身。由于视图本身是固定的，它不会随浏览器窗口的滚动条滚动而变化，除非你在屏幕中移动浏览器窗口的屏幕位置，或改变浏览器窗口的显示大小，因此固定定位的元素会始终位于浏览器窗口内视图的某个位置，不会受文档流动影响</p>
-<p><strong>常用手法:相对定位+绝对定位</strong><br>将包含的外层元素设为<code>position:relative</code>,将定位的元素设为<code>position:absolute; top:xxx...</code>来实现</p>
-<hr>
-<p>属性box-sizing(需要前缀)<br>-webkit-<em><br>-moz-</em></p>
-<hr>
-<p>用inline-block来实现float的效果:但是</p>
-<ol>
-<li>vertical-algin会影响</li>
-<li>每一列的宽度都要设置</li>
-<li>如果文本中有空格的话就会有间隙(inline-block本来就是这样)</li>
-</ol>
-<hr>
-<p>css新属性,帮助文字的多列布局</p>
-<ul>
-<li><p>column</p>
-</li>
-<li><p>flexbox<br>  新的flexbox布局模式被用来重新定义css中的布局方式(但最近改动频繁,浏览器对他的支持不一)<br>  <a href="http://zh.learnlayout.com/flexbox.html" target="_blank" rel="external">flexbox链接</a></p>
-</li>
-</ul>
-<hr>
-<p>双飞翼布局,圣杯介绍(呃,这名字可真是相当的2)<br><a href="http://www.cnblogs.com/2050/archive/2012/08/13/2636467.html" target="_blank" rel="external">强大的负边距</a><br>利用负的margin调整位置(文本流里面的定位计算实质也要通过margin来的)</p>
-<hr>
-<p>float&amp;clear<br>清除浮动一般就两类方法:</p>
-<ol>
-<li>通过在浮动元素的末尾添加一个空元素，设置 clear：both属性，after伪元素其实也是通过 content 在元素的后面生成了内容为一个点的块级元素</li>
-<li>通过设置父元素 overflow 或者display：table 属性来闭合浮动(它这里的原理是涉及到了BFC)</li>
-</ol>
-<p>更多详情相关</p>
-<h2 id="那些年我们一起清除过的浮动"><a href="http://www.iyunlu.com/view/css-xhtml/55.html" target="_blank" rel="external">那些年我们一起清除过的浮动</a></h2><p>BFC<br><a href="http://www.cnblogs.com/pigtail/archive/2013/01/23/2871627.html" target="_blank" rel="external">关于Block Formatting Context</a></p>
-<p>嗯,看了之后我觉得有时候我们可能有必要去看看css规范里面的计算规则.</p>
-<p>简单说一下BFC的特性:</p>
-<ol>
-<li>块级格式化上下文(即BFC)会阻止外边距叠加(一般来说相邻两个元素的margin会相互叠加的,如果是两个元素处于不同的BFC的话BFC就不会有这种情况出现了,但这时候的负的margin会不起作用,因为不同的BFC会创建隐式的外边距来阻止块之间的叠加)</li>
-<li>块级格式化上下文不会重叠浮动元素(原理同上)</li>
-<li>块级格式化上下文通常可以包含浮动</li>
-</ol>
-<p>如何生成一个BFC?</p>
-<ol>
-<li>float除了none以外的值</li>
-<li>overflow除了visible以外的值(hidden,auto,scroll)</li>
-<li>display(table-cell,table-caption,inline-block)</li>
-<li>position(absolute,fixed)</li>
-<li>fieldset元素</li>
-</ol>
-<p>一个有关布局很棒的网站:<br><a href="http://zh.learnlayout.com/" target="_blank" rel="external">学习css布局</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/假期/">假期</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/布局/">布局</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>

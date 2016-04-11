@@ -187,6 +187,232 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-关于css布局的一些疑问记录" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/10/关于css布局的一些疑问记录/" class="article-date">
+  	<time datetime="2015-07-10T08:02:04.000Z" itemprop="datePublished">2015-07-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/10/关于css布局的一些疑问记录/">关于css的一些疑问记录</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有关实践的代码放到了codepen上面,<a href="http://codepen.io/d-ailin/pen" target="_blank" rel="external">链接</a></p>
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="WvJojP" data-default-tab="result" data-user="d-ailin" class="codepen">See the Pen <a href="http://codepen.io/d-ailin/pen/WvJojP/" target="_blank" rel="external">basic layout</a> by ailin (<a href="http://codepen.io/d-ailin" target="_blank" rel="external">@d-ailin</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>第一个是用两种方法实现居中效果</p>
+<ol>
+<li>我感觉margin:auto应该是最常用,正规的了</li>
+<li>设置为display:inline-block,外层包一个,设置text-algin:center</li>
+</ol>
+<p>第二个是用了三种方法实现两列布局(左列宽度不变,右列宽度自适应,听说这是叫双翼布局)</p>
+<ol>
+<li>用的经典的float,但是有个注意的点就是一开始float以后看上去就ok了,其实蓝色div是有一部分”埋”在了红div的底下的,这个不是正确的布局,这个时候的右列要设一个margin-right</li>
+<li>用了relative-absolute经典定位</li>
+<li>用了flex-box做布局</li>
+</ol>
+<p>第三个是用两种方法实现三列布局(左右列的宽度都不变,中间的宽度自适应,这个叫圣杯布局…)</p>
+<ol>
+<li>浮动布局</li>
+<li>relative-absolute定位布局</li>
+<li><strong>用负的margin实现</strong><br> 个人认识:负margin是个很神奇的东西,它还可以和float还有position一起合作.它可以通过margin设为负,使得下面一行的快元素可以退回到上面一行中,但这又是在文档流中的,所以不会引起像float引起的对外面元素的一些影响.感觉很不错.<br> <a href="http://chen106106.iteye.com/blog/1631865" target="_blank" rel="external">通过圣杯布局认识负margin的作用</a><br> <a href="http://www.tuicool.com/articles/zYz2Iz" target="_blank" rel="external">负margin对布局的作用</a></li>
+</ol>
+<p>第四个是浮动布局</p>
+<ol>
+<li>浮动布局</li>
+<li>display:inline-block</li>
+</ol>
+<hr>
+<p><strong>Q&amp;A</strong></p>
+<ol>
+<li><p>在三列布局的方法2的实现中,如果div-b和div-c的位置不一样,实现的效果会不一样.其中div-a设置的<code>float:left</code>,div-c设置的<code>float:right</code>,他们的宽度都是设成80px的,所以中间的div-b的设置的<code>margin-left:80px, margin-right: 80px</code>,按理说float流和文本流之间没有冲撞的(文字围绕除外),但是如果将div-c放在div-b的后面的话,div-c就会出现在div-a,div-b的下面一行的右边,是div-b的margin-right影响到了div-c的float了吗?但是为什么div-a就不会受到影响呢?(这个应该是因为div-a先于div-b的,这个经过了实验验证的,当div-a后于div-b布局时,也会出现在下面一行中)?那float其实就是会受到正常文本流的margin影响的咯?(我觉得这个疑问应该要深入了解一下css的规则手册有个float和margin的实现计算,之后再更新)</p>
+</li>
+<li><p>min-width —&gt; 滚动条</p>
+</li>
+<li>gradient css属性</li>
+<li>实现多列高度自适应(这个是负margin的应用,其实布局很多都可以用负margin来实现)<br> padding是用来<br><a href="http://blog.sina.com.cn/s/blog_866347270100yl5t.html" target="_blank" rel="external">链接</a><br><a href="http://www.cnblogs.com/2050/archive/2012/08/13/2636467.html#2457812" target="_blank" rel="external">奇淫异术负边距</a><br>总结: margin是负责模块外的布局,padding是负责内容方面的,这里还要要求双方的内容高度不是0,这个可以通过在after插入content解决</li>
+</ol>
+<p>总结:布局可以有很多方式完成,主要有</p>
+<ol>
+<li>浮动定位</li>
+<li>绝对定位</li>
+<li>利用负margin定位</li>
+</ol>
+<p>当然有很多居中问题要解决,常用的有</p>
+<ol>
+<li>margin:auto</li>
+<li>设为display: inline-block以后,在父元素一层设text-algin: center</li>
+<li>line-height == height</li>
+</ol>
+<p>有时不知为何会出现空隙..此时要float一下空隙就没了</p>
+<p>设置height:100% 时会失效<br>解决方法:</p>
+<ol>
+<li>100%这个百分比是要相对于父元素来讲的,父元素没有设置height的话,有可能就会失效</li>
+<li>html和body也要设置好百分比100%</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基本功/">基本功</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/布局/">布局</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-CSS的布局" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/09/CSS的布局/" class="article-date">
+  	<time datetime="2015-07-09T07:50:09.000Z" itemprop="datePublished">2015-07-09</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/09/CSS的布局/">CSS的布局</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="行高">行高</h3><p><a href="http://www.cnblogs.com/fengzheng126/archive/2012/05/18/2507632.html" target="_blank" rel="external">深入了解line-height</a></p>
+<hr>
+<h3 id="盒子模型">盒子模型</h3><p>从内到外是:内容,padding,border和margin<br>注意:width一般都只是指内容的宽度,元素的实际表现出来的宽度大小往往是内容的width+padding+border-width</p>
+<hr>
+<h3 id="基本布局模型:">基本布局模型:</h3><ol>
+<li>流动模型(基本默认)</li>
+<li>浮动模型(float)</li>
+<li>层模型(layout)</li>
+</ol>
+<p><strong>流动模型</strong><br>特征:</p>
+<ol>
+<li>块状元素都会在所处的包含元素自上而下按顺序垂直延伸分布,默认下块状元素的宽度都是100%</li>
+<li>内联元素都是在所处的包含元素内从左到右水平分布显示</li>
+</ol>
+<p><strong>浮动模型</strong><br>本质意图就是要让内容不要独占一行,使内容并排显示</p>
+<p><strong>层模型</strong></p>
+<ol>
+<li>绝对定位(absolute)</li>
+<li>相对定位(relative)</li>
+<li>固定定位(fixed)</li>
+</ol>
+<p><strong>绝对定位</strong><br>这条语句的作用将元素从文档流中拖出来，然后使用left、right、top、bottom属性相对于其最接近的一个具有定位属性的父包含块进行绝对定位。如果不存在这样的包含块，则相对于body元素，即相对于浏览器窗口</p>
+<p><strong>相对定位</strong><br>它通过left、right、top、bottom属性确定元素在正常文档流中的偏移位置。相对定位完成的过程是首先按static(float)方式生成一个元素(并且元素像层一样浮动了起来)，然后相对于以前的位置移动，移动的方向和幅度由left、right、top、bottom属性确定，偏移前的位置保留不动。</p>
+<p><strong>固定定位</strong><br>表示固定定位，与absolute定位类型类似，但它的相对移动的坐标是视图（屏幕内的网页窗口）本身。由于视图本身是固定的，它不会随浏览器窗口的滚动条滚动而变化，除非你在屏幕中移动浏览器窗口的屏幕位置，或改变浏览器窗口的显示大小，因此固定定位的元素会始终位于浏览器窗口内视图的某个位置，不会受文档流动影响</p>
+<p><strong>常用手法:相对定位+绝对定位</strong><br>将包含的外层元素设为<code>position:relative</code>,将定位的元素设为<code>position:absolute; top:xxx...</code>来实现</p>
+<hr>
+<p>属性box-sizing(需要前缀)<br>-webkit-<em><br>-moz-</em></p>
+<hr>
+<p>用inline-block来实现float的效果:但是</p>
+<ol>
+<li>vertical-algin会影响</li>
+<li>每一列的宽度都要设置</li>
+<li>如果文本中有空格的话就会有间隙(inline-block本来就是这样)</li>
+</ol>
+<hr>
+<p>css新属性,帮助文字的多列布局</p>
+<ul>
+<li><p>column</p>
+</li>
+<li><p>flexbox<br>  新的flexbox布局模式被用来重新定义css中的布局方式(但最近改动频繁,浏览器对他的支持不一)<br>  <a href="http://zh.learnlayout.com/flexbox.html" target="_blank" rel="external">flexbox链接</a></p>
+</li>
+</ul>
+<hr>
+<p>双飞翼布局,圣杯介绍(呃,这名字可真是相当的2)<br><a href="http://www.cnblogs.com/2050/archive/2012/08/13/2636467.html" target="_blank" rel="external">强大的负边距</a><br>利用负的margin调整位置(文本流里面的定位计算实质也要通过margin来的)</p>
+<hr>
+<p>float&amp;clear<br>清除浮动一般就两类方法:</p>
+<ol>
+<li>通过在浮动元素的末尾添加一个空元素，设置 clear：both属性，after伪元素其实也是通过 content 在元素的后面生成了内容为一个点的块级元素</li>
+<li>通过设置父元素 overflow 或者display：table 属性来闭合浮动(它这里的原理是涉及到了BFC)</li>
+</ol>
+<p>更多详情相关</p>
+<h2 id="那些年我们一起清除过的浮动"><a href="http://www.iyunlu.com/view/css-xhtml/55.html" target="_blank" rel="external">那些年我们一起清除过的浮动</a></h2><p>BFC<br><a href="http://www.cnblogs.com/pigtail/archive/2013/01/23/2871627.html" target="_blank" rel="external">关于Block Formatting Context</a></p>
+<p>嗯,看了之后我觉得有时候我们可能有必要去看看css规范里面的计算规则.</p>
+<p>简单说一下BFC的特性:</p>
+<ol>
+<li>块级格式化上下文(即BFC)会阻止外边距叠加(一般来说相邻两个元素的margin会相互叠加的,如果是两个元素处于不同的BFC的话BFC就不会有这种情况出现了,但这时候的负的margin会不起作用,因为不同的BFC会创建隐式的外边距来阻止块之间的叠加)</li>
+<li>块级格式化上下文不会重叠浮动元素(原理同上)</li>
+<li>块级格式化上下文通常可以包含浮动</li>
+</ol>
+<p>如何生成一个BFC?</p>
+<ol>
+<li>float除了none以外的值</li>
+<li>overflow除了visible以外的值(hidden,auto,scroll)</li>
+<li>display(table-cell,table-caption,inline-block)</li>
+<li>position(absolute,fixed)</li>
+<li>fieldset元素</li>
+</ol>
+<p>一个有关布局很棒的网站:<br><a href="http://zh.learnlayout.com/" target="_blank" rel="external">学习css布局</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/假期/">假期</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/布局/">布局</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-假期第一天" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -872,67 +1098,9 @@
 
 
   
-    <article id="post-2015-05-07-about-jeklly" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/05/07/2015-05-07-about-jeklly/" class="article-date">
-  	<time datetime="2015-05-06T16:00:00.000Z" itemprop="datePublished">2015-05-07</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/07/2015-05-07-about-jeklly/">jekyll以及主题</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>jekyll整体的框架比较简单明了，官网说得也比较清楚。链接： <a href="http://jekyllrb.com/" target="_blank" rel="external">官网</a>，还有一个是<a href="http://jekyllcn.com/" target="_blank" rel="external">中文的网站</a></p>
-<p>jekyll的主题也有很多，链接:<a href="http://jekyllcn.com/docs/sites/" target="_blank" rel="external">友情链接</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jekyll/">jekyll</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/博客搭建/">博客搭建</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 </div>

@@ -3,17 +3,38 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2016 | ailin</title>
+  <title>ailin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ailin的博客">
-<meta property="og:type" content="website">
+  <meta name="description" content="title: “mvvm学习”date: 2016-04-10tags:
+
+框架
+js
+mvvm
+
+最近想做百度前端学院很久之前布置的那个mvvm表单框架，但是想了挺久，总是感觉还是有些地方不对劲，代码也是写了又删，所以还是决定多看一下资料再去写。
+因为之前写todo的时候用的是模拟mvc框架的工作流程来写的，中间发现了一个问题就是如果view中的数据是相互绑定的话，在mvc也是会再次通过cont">
+<meta property="og:type" content="article">
 <meta property="og:title" content="ailin">
-<meta property="og:url" content="http://dengal3.github.com/archives/2016/index.html">
+<meta property="og:url" content="http://dengal3.github.com/2016/04/12/2016-04-10-MVVM学习/index.html">
 <meta property="og:site_name" content="ailin">
-<meta property="og:description" content="ailin的博客">
+<meta property="og:description" content="title: “mvvm学习”date: 2016-04-10tags:
+
+框架
+js
+mvvm
+
+最近想做百度前端学院很久之前布置的那个mvvm表单框架，但是想了挺久，总是感觉还是有些地方不对劲，代码也是写了又删，所以还是决定多看一下资料再去写。
+因为之前写todo的时候用的是模拟mvc框架的工作流程来写的，中间发现了一个问题就是如果view中的数据是相互绑定的话，在mvc也是会再次通过cont">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ailin">
-<meta name="twitter:description" content="ailin的博客">
+<meta name="twitter:description" content="title: “mvvm学习”date: 2016-04-10tags:
+
+框架
+js
+mvvm
+
+最近想做百度前端学院很久之前布置的那个mvvm表单框架，但是想了挺久，总是感觉还是有些地方不对劲，代码也是写了又删，所以还是决定多看一下资料再去写。
+因为之前写todo的时候用的是模拟mvc框架的工作流程来写的，中间发现了一个问题就是如果view中的数据是相互绑定的话，在mvc也是会再次通过cont">
   
     <link rel="alternative" href="/atom.xml" title="ailin" type="application/atom+xml">
   
@@ -185,217 +206,103 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-2016-04-10-MVVM学习" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2016/04/12/2016-04-10-MVVM学习/" class="article-date">
+  	<time datetime="2016-04-11T16:16:20.286Z" itemprop="datePublished">2016-04-12</time>
+</a>
+    </div>
   
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+    <div class="article-entry" itemprop="articleBody">
       
+        <p>title: “mvvm学习”<br>date: 2016-04-10<br>tags:</p>
+<ul>
+<li>框架</li>
+<li>js</li>
+<li><h1 id="mvvm">mvvm</h1></li>
+</ul>
+<p>最近想做百度前端学院很久之前布置的那个mvvm表单框架，但是想了挺久，总是感觉还是有些地方不对劲，代码也是写了又删，所以还是决定多看一下资料再去写。</p>
+<p>因为之前写todo的时候用的是模拟mvc框架的工作流程来写的，中间发现了一个问题就是如果view中的数据是相互绑定的话，在mvc也是会再次通过controller到model，然后在model那里触发另一个view模块下的改变，其实这是很没有必要的。</p>
+<p>mvvm框架的一个常见的功能就是数据的双向绑定，即多个绑定的view之间是相互触发的，这是由viewmodel来提供这个功能的。</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//      [<span class="atom">view</span>]  [<span class="atom">view</span>] [<span class="atom">view</span>]</span><br><span class="line">//         |      |       |</span><br><span class="line">//      [       <span class="atom">viewModel</span>            ]</span><br><span class="line">//              |       |</span><br><span class="line">//          [<span class="atom">model</span>]    [<span class="atom">model</span>]</span><br></pre></td></tr></table></figure>
+<p>在我眼里，mvvm就是这样的架构。只是viewmodel不同于传统的mvc中的c，viewmodel还兼顾了view与view之间的数据绑定。</p>
+<p>这里就要提及一般mvvm框架中常用的方法</p>
+<ul>
+<li>Object.defineProperties</li>
+<li>Mututaion Observer<br>前者是用来做model到view的，后者是用来做view到默认的</li>
+</ul>
+<p>【未完待续】</p>
+<p>相关链接：</p>
+<ul>
+<li><a href="http://gejiawen.github.io/2015/04/02/2-way-data-binding-and-define-property/" target="_blank" rel="external">JS中的双向数据绑定及Object.defineProperty方法</a></li>
+<li><a href="http://imweb.io/topic/56d40adc0848801a4ba198ce" target="_blank" rel="external">不会Object.defineProperty你就out了</a></li>
+<li><a href="https://addyosmani.com/blog/understanding-mvvm-a-guide-for-javascript-developers/" target="_blank" rel="external">Understanding MVVM - A Guide For JavaScript Developers</a></li>
+</ul>
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
+    </div>
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/04/12/2016-04-10-MVVM学习/" class="archive-article-date">
-  	<time datetime="2016-04-11T16:16:20.286Z" itemprop="datePublished">4月 12</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/04/06/2016-04-06-git安装和管理/" class="archive-article-date">
-  	<time datetime="2016-04-06T14:36:18.552Z" itemprop="datePublished">4月 6</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+<nav id="article-nav">
+  
+  
+    <a href="/2016/04/06/2016-04-06-git安装和管理/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/03/24/2016-03-24-关于面试中一些有意思的题目简单整理/" class="archive-article-date">
-  	<time datetime="2016-03-23T16:00:00.000Z" itemprop="datePublished">3月 24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/24/2016-03-24-关于面试中一些有意思的题目简单整理/">面试中遇到的一些有意思的问题整理</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/03/20/2016-03-20-More-About-setTimeout-and-event-loop/" class="archive-article-date">
-  	<time datetime="2016-03-19T16:00:00.000Z" itemprop="datePublished">3月 20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/20/2016-03-20-More-About-setTimeout-and-event-loop/">从setTimeout看event loop</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/浏览器原理/">浏览器原理</a></li></ul>
-	</div>
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2016-04-10-MVVM学习" data-title="" data-url="http://dengal3.github.com/2016/04/12/2016-04-10-MVVM学习/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/03/19/2016-03-19-记录马克儿/" class="archive-article-date">
-  	<time datetime="2016-03-18T16:00:00.000Z" itemprop="datePublished">3月 19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/19/2016-03-19-记录马克儿/">记录马克儿</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/chrome-extension/">chrome extension</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习记录/">学习记录</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/03/12/2016-03-12-说说有关setTimeout的那些事/" class="archive-article-date">
-  	<time datetime="2016-03-11T16:00:00.000Z" itemprop="datePublished">3月 12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/12/2016-03-12-说说有关setTimeout的那些事/">有关setTimeout的那些事</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/setTimeout/">setTimeout</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/定时器/">定时器</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/03/06/2016-03-06-Jquery源码之jsonp/" class="archive-article-date">
-  	<time datetime="2016-03-05T16:00:00.000Z" itemprop="datePublished">3月 6</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/06/2016-03-06-Jquery源码之jsonp/">JQuery中的jsonp源码剖析</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jquery/">Jquery</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jsonp/">jsonp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/源码剖析/">源码剖析</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 </div>
       <footer id="footer">
   <div class="outer">
