@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
+title: ailin的网络日志
+subtitle: 流水账
 description:
-author: John Doe
-language:
+author: ailin
+language: zh-Hans
 timezone:
 
 # URL
@@ -70,3 +70,4 @@ theme: next
 deploy:
   type: git
   repo: git@github.com:dengal3/dengal3.github.io.git
+  branch: master
